@@ -1,0 +1,149 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { GuideCallout } from '@/app/components/guide/GuideCallout'
+import { GuideCodeBlock } from '@/app/components/guide/GuideCodeBlock'
+
+export const metadata: Metadata = {
+  title: 'How RandomKeygen Generates Secure Values in Your Browser',
+  description: 'Learn how RandomKeygen uses the browser Web Crypto API, why local generation reduces exposure, what stays on your device, and how to verify it yourself.',
+  keywords: [
+    'browser random number generation',
+    'client-side password generator',
+    'Web Crypto API',
+    'crypto.getRandomValues',
+    'local key generation',
+    'secure random generator',
+  ],
+  openGraph: {
+    title: 'How RandomKeygen Works: Secure, Local Generation',
+    description: 'A plain-language and technical explanation of how RandomKeygen creates values locally in your browser.',
+    url: 'https://randomkeygen.com/guides/how-randomkeygen-works',
+  },
+  alternates: {
+    canonical: 'https://randomkeygen.com/guides/how-randomkeygen-works',
+  },
+}
+
+export default function HowRandomKeygenWorksPage() {
+  return (
+    <article className="guide-article">
+      <header className="guide-article-header">
+        <p className="eyebrow">Guide · Security &amp; privacy</p>
+        <h1>Secure randomness, generated where you can see it.</h1>
+        <p className="guide-deck">
+          RandomKeygen creates passwords and secrets inside your browser. That keeps the generated value out of a server request, server log, database, or account history—and gives you a simple way to verify how it works.
+        </p>
+        <p className="guide-byline">Privacy &amp; Security · 7 min read</p>
+      </header>
+
+      <GuideCallout kind="success" label="The short version:">
+        Your browser already has a security-grade random-number generator. RandomKeygen uses it locally, formats the result for the job you choose, and shows it directly to you.
+        Loading the website still involves normal internet traffic. The important distinction is that the generated value itself is not submitted to RandomKeygen by the generation action.
+      </GuideCallout>
+
+      <h2 id="three-local-steps">Three local steps</h2>
+      <p>What happens when you click Generate:</p>
+      <ol className="list-decimal pl-6">
+        <li>
+          <strong>Your browser creates random bytes.</strong> The generator asks the browser Web Crypto API for cryptographically strong random values. It does not ask our server to create them.
+        </li>
+        <li>
+          <strong>The page formats the result.</strong> Those bytes become the password, token, UUID, hex key, or other format you selected—all inside the open tab.
+        </li>
+        <li>
+          <strong>You decide where it goes.</strong> The value is displayed for you to copy. The generator does not create an account, history, or server-side copy of the result.
+        </li>
+      </ol>
+
+      <h2 id="where-randomness-comes-from">Where the randomness comes from</h2>
+      <p>
+        RandomKeygen uses <code>crypto.getRandomValues()</code>, part of the browser&apos;s Web Crypto API. It produces random bytes using a cryptographically secure pseudorandom number generator, or CSPRNG.
+      </p>
+      <p>
+        The browser implementation is designed to draw on the operating system&apos;s entropy source. Modern operating systems maintain that source using hardware and system events, then make secure random bytes available to applications—including your browser.
+      </p>
+      <p>
+        “Pseudorandom” does not mean weak. It means a carefully designed generator expands a securely seeded internal state into values that are computationally impractical to predict.
+      </p>
+      <p>
+        The Web Crypto standard requires <code>getRandomValues()</code> to return cryptographically strong random values. It is the browser primitive intended for this job.
+      </p>
+      <GuideCodeBlock
+        label="generation-flow.js"
+        code={`1. Create byte array
+2. Fill with Web Crypto
+3. Format locally
+4. Display in this tab
+
+// No generated-value upload step`}
+      />
+      <p className="guide-inline-cta">
+        <a href="https://www.w3.org/TR/WebCryptoAPI/#Crypto-method-getRandomValues" target="_blank" rel="noopener noreferrer">
+          Read the Web Crypto standard ↗
+        </a>
+      </p>
+
+      <h2 id="fewer-places">Fewer places for a secret to exist</h2>
+      <GuideCallout kind="success" label="Generated in your browser:">
+        <ul className="list-none mt-1 space-y-1">
+          <li>✓ No generation request containing the value</li>
+          <li>✓ No generated-value database or account history</li>
+          <li>✓ No value waiting in a server response or application log</li>
+          <li>✓ Generation can continue after the page is loaded offline</li>
+        </ul>
+      </GuideCallout>
+      <GuideCallout kind="warning" label="Generated by a server:">
+        <ul className="list-none mt-1 space-y-1">
+          <li>— The server creates or receives the secret</li>
+          <li>— The value travels back to the browser</li>
+          <li>— Logging and storage must be implemented perfectly</li>
+          <li>— You must trust both delivery and server handling</li>
+        </ul>
+      </GuideCallout>
+
+      <h2 id="no-mouse-movements">More signals do not automatically mean more security</h2>
+      <p>
+        Mouse paths, typing rhythms, browser details, and similar behavioral signals are difficult to measure conservatively. They can be repetitive, automated, observed, or manipulated—and collecting them can resemble fingerprinting.
+      </p>
+      <p>
+        The operating system is better positioned to gather and mix appropriate entropy. RandomKeygen therefore relies on the browser&apos;s security primitive instead of building a homemade entropy pool from user behavior.
+      </p>
+      <p className="guide-inline-cta">
+        <a href="https://www.rfc-editor.org/rfc/rfc4086.html#section-3.5" target="_blank" rel="noopener noreferrer">
+          Read the IETF guidance on user-event entropy ↗
+        </a>
+      </p>
+
+      <h2 id="the-promise">What local generation does—and does not—protect</h2>
+      <h3>It helps protect against</h3>
+      <p>Generated values appearing in application servers, request bodies, server responses, server logs, or account histories.</p>
+      <h3>It does not replace</h3>
+      <p>A password manager, secrets manager, secure backup, access controls, or a key-rotation process after you copy the value.</p>
+      <h3>It cannot protect</h3>
+      <p>A compromised device, malicious browser extension, injected script, exposed clipboard, screen recording, or someone with access to your unlocked computer.</p>
+
+      <h2 id="verify-it-yourself">You do not have to take the label on faith</h2>
+      <ol className="list-decimal pl-6">
+        <li><strong>Open browser developer tools.</strong> Select the Network panel and clear the request list.</li>
+        <li><strong>Generate another value.</strong> The result changes immediately without a generation response from our server.</li>
+        <li><strong>Inspect any traffic.</strong> Normal page, CDN, prefetch, or performance requests can still occur; the generated value should not appear in their URL or payload.</li>
+        <li><strong>Try it offline.</strong> After the page has loaded, take the browser offline and generate again.</li>
+      </ol>
+
+      <GuideCallout kind="warning" label="For especially sensitive production systems:">
+        Browser generation can remove a server exposure point, but your organization may require generation inside its own infrastructure, hardware security module, or secrets manager. Many RandomKeygen tools include equivalent terminal commands for that workflow.
+        The safest choice is the one that matches your threat model, audit requirements, and storage process—not simply the longest-looking string.
+      </GuideCallout>
+
+      <section className="guide-related" aria-labelledby="related-tools-title">
+        <h2 id="related-tools-title">Related tools</h2>
+        <p>Choose the format you need, then store the result somewhere designed to protect secrets.</p>
+        <div className="guide-card-grid">
+          <Link href="/password"><strong>Generate a password →</strong><span>Strong random passwords, created locally.</span></Link>
+          <Link href="/api-key"><strong>Generate an API key →</strong><span>Secure API tokens with configurable prefixes.</span></Link>
+          <Link href="/encryption-key"><strong>Generate random bytes →</strong><span>Hex and base64 keys for encryption workflows.</span></Link>
+        </div>
+      </section>
+    </article>
+  )
+}
