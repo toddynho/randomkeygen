@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { categoryHrefs } from '../lib/tool-directory'
+import { PalettePicker } from './PalettePicker'
 
 type ThemeSetting = 'light' | 'dark' | 'system'
 
@@ -129,6 +130,8 @@ export function Header() {
               </svg>
               Star
             </a>
+
+            <PalettePicker />
 
             <Link
               href="/guides/how-randomkeygen-works"

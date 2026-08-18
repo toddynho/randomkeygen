@@ -344,6 +344,175 @@
   background-color: var(--surface);
 }
 
+/* Curated Colors.to palettes. The source swatches stay recognizable while
+   role-specific values preserve contrast and the product's quiet hierarchy. */
+:root[data-palette='ocean-breeze'] {
+  --palette-primary: #0077b6;
+  --palette-secondary: #00b4d8;
+  --palette-pale: #caf0f8;
+  --palette-text: #07304a;
+  --palette-accent-light: #0077b6;
+  --palette-on-accent-light: #ffffff;
+  --palette-accent-dark: #00b4d8;
+  --palette-accent-strong-dark: #90e0ef;
+  --palette-on-accent-dark: #061d25;
+}
+
+:root[data-palette='forest-walk'] {
+  --palette-primary: #588157;
+  --palette-secondary: #a3b18a;
+  --palette-pale: #dad7cd;
+  --palette-text: #26351d;
+  --palette-accent-light: #477047;
+  --palette-on-accent-light: #ffffff;
+  --palette-accent-dark: #74c69d;
+  --palette-accent-strong-dark: #b7e4c7;
+  --palette-on-accent-dark: #102419;
+}
+
+:root[data-palette='berry-smoothie'] {
+  --palette-primary: #a62349;
+  --palette-secondary: #db4a6b;
+  --palette-pale: #f3c5c5;
+  --palette-text: #461638;
+  --palette-accent-light: #a62349;
+  --palette-on-accent-light: #ffffff;
+  --palette-accent-dark: #f06b88;
+  --palette-accent-strong-dark: #f3a5b6;
+  --palette-on-accent-dark: #2a0d1b;
+}
+
+:root[data-palette='lavender-fields'] {
+  --palette-primary: #7b2cbf;
+  --palette-secondary: #c77dff;
+  --palette-pale: #e0aaff;
+  --palette-text: #35124c;
+  --palette-accent-light: #7b2cbf;
+  --palette-on-accent-light: #ffffff;
+  --palette-accent-dark: #c77dff;
+  --palette-accent-strong-dark: #e0aaff;
+  --palette-on-accent-dark: #251033;
+}
+
+:root[data-palette='midnight-sky'] {
+  --palette-primary: #415a77;
+  --palette-secondary: #778da9;
+  --palette-pale: #d7e0ea;
+  --palette-text: #0d1b2a;
+  --palette-accent-light: #415a77;
+  --palette-on-accent-light: #ffffff;
+  --palette-accent-dark: #93a9c2;
+  --palette-accent-strong-dark: #c1cfdd;
+  --palette-on-accent-dark: #101b29;
+}
+
+:root[data-palette] {
+  --background: color-mix(in srgb, #ffffff 84%, var(--palette-pale));
+  --foreground: var(--palette-text);
+  --body: color-mix(in srgb, var(--palette-text) 82%, #ffffff);
+  --muted: color-mix(in srgb, var(--palette-text) 68%, #ffffff);
+  --muted-foreground: color-mix(in srgb, var(--palette-text) 52%, #ffffff);
+  --separator: color-mix(in srgb, var(--palette-text) 38%, #ffffff);
+  --border: color-mix(in srgb, var(--palette-secondary) 22%, #ffffff);
+  --border-strong: color-mix(in srgb, var(--palette-secondary) 38%, #ffffff);
+  --band: color-mix(in srgb, #ffffff 88%, var(--palette-pale));
+  --band-border: color-mix(in srgb, var(--palette-secondary) 18%, #ffffff);
+  --hairline: color-mix(in srgb, var(--palette-secondary) 14%, #ffffff);
+  --surface: #ffffff;
+  --surface-muted: color-mix(in srgb, #ffffff 72%, var(--palette-pale));
+  --accent: var(--palette-accent-light);
+  --accent-strong: color-mix(in srgb, var(--palette-accent-light) 80%, #000000);
+  --accent-soft: color-mix(in srgb, var(--palette-primary) 9%, #ffffff);
+  --accent-border: color-mix(in srgb, var(--palette-secondary) 48%, #ffffff);
+  --accent-foreground: var(--palette-on-accent-light);
+  --link: var(--palette-accent-light);
+  --link-hover: color-mix(in srgb, var(--palette-accent-light) 76%, #000000);
+  --code-bg: #ffffff;
+  --code-border: color-mix(in srgb, var(--palette-secondary) 22%, #ffffff);
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--palette-text) 7%, transparent);
+  --shadow-card: 0 8px 24px color-mix(in srgb, var(--palette-text) 10%, transparent);
+  --tint-hover: color-mix(in srgb, var(--palette-primary) 8%, #ffffff);
+  --tint-neutral: color-mix(in srgb, var(--palette-pale) 42%, #ffffff);
+  --meter-off: color-mix(in srgb, var(--palette-secondary) 20%, #ffffff);
+  --disabled: color-mix(in srgb, var(--palette-text) 20%, #ffffff);
+  --border-dashed: color-mix(in srgb, var(--palette-text) 26%, #ffffff);
+  --btn-primary-bg: var(--palette-text);
+  --btn-primary-fg: #ffffff;
+  --btn-primary-hover: color-mix(in srgb, var(--palette-text) 88%, #ffffff);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-palette]:not([data-theme='light']) {
+    --background: color-mix(in srgb, #08090b 82%, var(--palette-text));
+    --foreground: color-mix(in srgb, #ffffff 90%, var(--palette-pale));
+    --body: color-mix(in srgb, #ffffff 72%, var(--palette-pale));
+    --muted: color-mix(in srgb, #ffffff 58%, var(--palette-secondary));
+    --muted-foreground: color-mix(in srgb, #ffffff 42%, var(--palette-secondary));
+    --separator: color-mix(in srgb, var(--palette-secondary) 55%, #111827);
+    --border: color-mix(in srgb, var(--palette-primary) 38%, #111318);
+    --border-strong: color-mix(in srgb, var(--palette-secondary) 46%, #111318);
+    --band: color-mix(in srgb, #0b0d10 76%, var(--palette-text));
+    --band-border: color-mix(in srgb, var(--palette-primary) 30%, #111318);
+    --hairline: color-mix(in srgb, var(--palette-primary) 24%, #111318);
+    --surface: color-mix(in srgb, #101217 74%, var(--palette-text));
+    --surface-muted: color-mix(in srgb, #151820 70%, var(--palette-text));
+    --accent: var(--palette-accent-dark);
+    --accent-strong: var(--palette-accent-strong-dark);
+    --accent-soft: color-mix(in srgb, var(--background) 76%, var(--palette-accent-dark));
+    --accent-border: color-mix(in srgb, var(--background) 52%, var(--palette-accent-dark));
+    --accent-foreground: var(--palette-on-accent-dark);
+    --link: var(--palette-accent-strong-dark);
+    --link-hover: color-mix(in srgb, var(--palette-accent-strong-dark) 76%, #ffffff);
+    --code-bg: color-mix(in srgb, #101217 74%, var(--palette-text));
+    --code-border: color-mix(in srgb, var(--palette-primary) 38%, #111318);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.46);
+    --tint-hover: color-mix(in srgb, var(--background) 84%, var(--palette-accent-dark));
+    --tint-neutral: color-mix(in srgb, var(--surface) 76%, var(--palette-secondary));
+    --meter-off: color-mix(in srgb, var(--surface) 70%, var(--palette-secondary));
+    --disabled: color-mix(in srgb, var(--surface) 62%, var(--palette-secondary));
+    --border-dashed: color-mix(in srgb, var(--surface) 55%, var(--palette-secondary));
+    --btn-primary-bg: var(--foreground);
+    --btn-primary-fg: var(--background);
+    --btn-primary-hover: #ffffff;
+  }
+}
+
+:root[data-theme='dark'][data-palette] {
+  --background: color-mix(in srgb, #08090b 82%, var(--palette-text));
+  --foreground: color-mix(in srgb, #ffffff 90%, var(--palette-pale));
+  --body: color-mix(in srgb, #ffffff 72%, var(--palette-pale));
+  --muted: color-mix(in srgb, #ffffff 58%, var(--palette-secondary));
+  --muted-foreground: color-mix(in srgb, #ffffff 42%, var(--palette-secondary));
+  --separator: color-mix(in srgb, var(--palette-secondary) 55%, #111827);
+  --border: color-mix(in srgb, var(--palette-primary) 38%, #111318);
+  --border-strong: color-mix(in srgb, var(--palette-secondary) 46%, #111318);
+  --band: color-mix(in srgb, #0b0d10 76%, var(--palette-text));
+  --band-border: color-mix(in srgb, var(--palette-primary) 30%, #111318);
+  --hairline: color-mix(in srgb, var(--palette-primary) 24%, #111318);
+  --surface: color-mix(in srgb, #101217 74%, var(--palette-text));
+  --surface-muted: color-mix(in srgb, #151820 70%, var(--palette-text));
+  --accent: var(--palette-accent-dark);
+  --accent-strong: var(--palette-accent-strong-dark);
+  --accent-soft: color-mix(in srgb, var(--background) 76%, var(--palette-accent-dark));
+  --accent-border: color-mix(in srgb, var(--background) 52%, var(--palette-accent-dark));
+  --accent-foreground: var(--palette-on-accent-dark);
+  --link: var(--palette-accent-strong-dark);
+  --link-hover: color-mix(in srgb, var(--palette-accent-strong-dark) 76%, #ffffff);
+  --code-bg: color-mix(in srgb, #101217 74%, var(--palette-text));
+  --code-border: color-mix(in srgb, var(--palette-primary) 38%, #111318);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.46);
+  --tint-hover: color-mix(in srgb, var(--background) 84%, var(--palette-accent-dark));
+  --tint-neutral: color-mix(in srgb, var(--surface) 76%, var(--palette-secondary));
+  --meter-off: color-mix(in srgb, var(--surface) 70%, var(--palette-secondary));
+  --disabled: color-mix(in srgb, var(--surface) 62%, var(--palette-secondary));
+  --border-dashed: color-mix(in srgb, var(--surface) 55%, var(--palette-secondary));
+  --btn-primary-bg: var(--foreground);
+  --btn-primary-fg: var(--background);
+  --btn-primary-hover: #ffffff;
+}
+
 html {
   color-scheme: light dark;
   scroll-behavior: smooth;

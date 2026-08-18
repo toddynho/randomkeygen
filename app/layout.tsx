@@ -54,12 +54,12 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {/* Apply the persisted theme before first paint to avoid a flash.
-            System preference is the default (no data-theme attribute). */}
+        {/* Apply persisted appearance settings before first paint to avoid a flash.
+            System/default preferences are represented by absent attributes. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('rkg-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}})()",
+              "(function(){try{var r=document.documentElement,t=localStorage.getItem('rkg-theme'),p=localStorage.getItem('rkg-palette');if(t==='dark'||t==='light')r.setAttribute('data-theme',t);if(['ocean-breeze','forest-walk','berry-smoothie','lavender-fields','midnight-sky'].indexOf(p)>-1)r.setAttribute('data-palette',p)}catch(e){}})()",
           }}
         />
         
