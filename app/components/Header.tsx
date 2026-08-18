@@ -116,6 +116,20 @@ export function Header() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-3">
+            <a
+              href="https://github.com/toddynho/randomkeygen"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Star RandomKeygen on GitHub"
+              title="Star RandomKeygen on GitHub"
+              className="hidden h-8 items-center gap-1.5 rounded-[9px] border border-[var(--border-strong)] bg-[var(--surface)] px-2.5 text-xs font-semibold text-[var(--foreground)] shadow-[var(--shadow-sm)] transition-colors hover:border-[var(--muted-foreground)] hover:bg-[var(--surface-muted)] lg:inline-flex"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="m12 2.75 2.78 5.63 6.22.9-4.5 4.39 1.06 6.2L12 16.94l-5.56 2.93 1.06-6.2L3 9.28l6.22-.9L12 2.75Z" />
+              </svg>
+              Star
+            </a>
+
             <Link
               href="/guides/how-randomkeygen-works"
               className="hidden items-center gap-2 text-xs font-semibold text-[var(--accent-strong)] transition-colors hover:text-[var(--accent)] sm:flex"
