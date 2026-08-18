@@ -1,7 +1,8 @@
 {
   "name": "randomkeygen",
   "version": "2.0.0",
-  "description": "RandomKeygen - The Secure Password & Keygen Generator",
+  "description": "Free client-side password and key generator powered by the Web Crypto API",
+  "homepage": "https://randomkeygen.com",
   "private": true,
   "engines": {
     "node": ">=20.9.0"
@@ -34,5 +35,19 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/toddynho/randomkeygen.git"
-  }
+  },
+  "keywords": [
+    "password-generator",
+    "key-generator",
+    "cryptography",
+    "webcrypto",
+    "api-key",
+    "jwt",
+    "uuid",
+    "encryption",
+    "security",
+    "nextjs",
+    "typescript",
+    "client-side"
+  ]
 }

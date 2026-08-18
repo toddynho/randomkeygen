@@ -1,8 +1,24 @@
 # RandomKeygen
 
-A free, client-side password and key generator. Every value is produced in your browser with the Web Crypto API — nothing is ever transmitted, logged, or stored.
+[![Live site](https://img.shields.io/badge/live-randomkeygen.com-047857)](https://randomkeygen.com)
+[![Client-side](https://img.shields.io/badge/security-100%25%20client--side-065f46)](https://randomkeygen.com/guides/how-randomkeygen-works)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![MIT License](https://img.shields.io/badge/license-MIT-1c1917)](LICENSE)
+
+A free, open-source password and key generator for developers and security-conscious users. Generate secure passwords, API keys, UUIDs, JWT secrets, encryption keys, and more—locally in your browser with the Web Crypto API.
+
+**Nothing is ever transmitted, logged, or stored.**
 
 🔗 **Live:** [https://randomkeygen.com](https://randomkeygen.com)
+
+## Popular generators
+
+- [Secure Password Generator](https://randomkeygen.com/password) — random, memorable, pronounceable, and passphrase modes
+- [API Key Generator](https://randomkeygen.com/api-key) — prefixed, production-style API credentials
+- [JWT Secret Generator](https://randomkeygen.com/jwt-secret) — HS256, HS384, and HS512 signing secrets
+- [UUID Generator](https://randomkeygen.com/uuid) — browser-generated UUIDs
+- [Encryption Key Generator](https://randomkeygen.com/encryption-key) — AES and general-purpose encryption keys
+- [Security Guides](https://randomkeygen.com/guides) — practical guidance for passwords, JWTs, OAuth, encryption, and key management
 
 ## Why it's safe to use
 
@@ -61,3 +77,16 @@ Built with Next.js (App Router), TypeScript, and Tailwind CSS v4. All routes pre
 ## License
 
 [MIT](LICENSE) © Todd Garland
+
+## Credits
+
+Built by [@toddo](https://x.com/toddo). Hosted by [ready.dev](https://ready.dev?ref=randomkeygen.com).
+
+## Related developer tools
+
+- [JSONLint](https://jsonlint.com) — JSON validator and formatter
+- [JSCompress](https://jscompress.com) — JavaScript and CSS minifier
+- [DNS Lookup](https://dns-lookup.com) — DNS and IP tools
+- [JSONCompare](https://jsoncompare.com) — JSON comparison and diff tool
+- [Colors.to](https://colors.to) — color conversion and palette tools
+- [Design.dev](https://design.dev) — design resources for developers
