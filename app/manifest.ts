@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Professional keygen toolkit: generate cryptographically secure passwords, API keys, UUIDs, JWT secrets, encryption keys, and more. Free, open-source, runs entirely in your browser.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#10b981',
+    background_color: '#faf9f7',
+    theme_color: '#047857',
     categories: ['developer-tools', 'security', 'utilities'],
     icons: [
       {
