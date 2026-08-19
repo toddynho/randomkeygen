@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
+import './palette-themes.css'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
@@ -39,7 +40,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [{ url: '/randomkeygen-icon.svg?v=2', type: 'image/svg+xml' }],
+    shortcut: '/randomkeygen-icon.svg?v=2',
+    apple: '/randomkeygen-icon-192.png?v=2',
   },
 }
 
@@ -70,7 +73,7 @@ export default function RootLayout({
             '@type': 'Organization',
             name: 'RandomKeygen',
             url: 'https://randomkeygen.com',
-            logo: 'https://randomkeygen.com/favicon.ico',
+            logo: 'https://randomkeygen.com/randomkeygen-icon-512.png',
             description: 'Professional toolkit for generating cryptographically secure passwords, API keys, UUIDs, JWT secrets, and encryption keys.',
             foundingDate: '2020',
             sameAs: [

@@ -12,17 +12,17 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ['developer-tools', 'security', 'utilities'],
     icons: [
       {
-        src: '/favicon.ico',
+        src: '/randomkeygen-icon.svg?v=2',
         sizes: 'any',
-        type: 'image/x-icon',
+        type: 'image/svg+xml',
       },
       {
-        src: '/icon-192.png',
+        src: '/randomkeygen-icon-192.png?v=2',
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/icon-512.png', 
+        src: '/randomkeygen-icon-512.png?v=2',
         sizes: '512x512',
         type: 'image/png',
       }
@@ -33,28 +33,28 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: 'Password',
         description: 'Generate secure passwords',
         url: '/password',
-        icons: [{ src: '/favicon.ico', sizes: '96x96' }]
+        icons: [{ src: '/randomkeygen-icon-192.png?v=2', sizes: '192x192', type: 'image/png' }]
       },
       {
         name: 'API Key Generator',
         short_name: 'API Key',
         description: 'Generate API keys',
         url: '/api-key',
-        icons: [{ src: '/favicon.ico', sizes: '96x96' }]
+        icons: [{ src: '/randomkeygen-icon-192.png?v=2', sizes: '192x192', type: 'image/png' }]
       },
       {
         name: 'JWT Secret',
         short_name: 'JWT',
         description: 'Generate JWT secrets',
         url: '/jwt-secret',
-        icons: [{ src: '/favicon.ico', sizes: '96x96' }]
+        icons: [{ src: '/randomkeygen-icon-192.png?v=2', sizes: '192x192', type: 'image/png' }]
       },
       {
         name: 'UUID Generator',
         short_name: 'UUID',
         description: 'Generate UUIDs',
         url: '/uuid',
-        icons: [{ src: '/favicon.ico', sizes: '96x96' }]
+        icons: [{ src: '/randomkeygen-icon-192.png?v=2', sizes: '192x192', type: 'image/png' }]
       }
     ]
   }
