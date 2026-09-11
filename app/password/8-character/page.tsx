@@ -76,7 +76,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Can I use these passwords for banking?',
-    answer: 'Our 8-character passwords are cryptographically secure and suitable for banking applications. Many banks actually require 8-character passwords as their standard. Always use unique passwords for different financial accounts.',
+    answer: "Eight-character passwords can meet some minimum requirements and may be useful for legacy systems that only accept that length. For accounts that matter, choose a longer password when the site allows it and use a unique generated password for each account.",
   },
 ]
 
