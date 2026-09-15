@@ -84,7 +84,7 @@ export default function RandomStringPage() {
       <GeneratorControls
         onGenerate={handleGenerate}
         generateLabel="Generate strings"
-        readout={{ bits: entropy, poolSize }}
+        readout={{ bits: entropy, poolSize , pageExplanationV1: entropy >= 70 ? "Use a random string when you need a value that is harder to predict than a human-made one, such as a session identifier, reset token, verification code, or test fixture. Choose the length and character set that fit the system you are using, and use longer values when the string may be exposed outside your app." : undefined }}
         error={charsetType === 'custom' && poolSize === 0 ? 'Enter at least one character in the custom charset.' : null}
       >
         <ControlField
