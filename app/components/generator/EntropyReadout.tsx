@@ -7,6 +7,7 @@ interface EntropyReadoutProps {
   poolSize: number
   /** Overrides the default "{poolSize}-character pool" label (e.g. "768-word pool"). */
   poolLabel?: string
+  pageExplanationV1?: string
 }
 
 const SEGMENTS = [
@@ -16,7 +17,7 @@ const SEGMENTS = [
   { width: '28.6%', color: 'var(--success)', label: 'Strong · 100+' },
 ]
 
-export function EntropyReadout({ bits, poolSize, poolLabel }: EntropyReadoutProps) {
+export function EntropyReadout({ bits, poolSize, poolLabel, pageExplanationV1 }: EntropyReadoutProps) {
   const markerLeft = `${Math.min(99, (bits / 140) * 100).toFixed(1)}%`
 
   return (
@@ -45,7 +46,7 @@ export function EntropyReadout({ bits, poolSize, poolLabel }: EntropyReadoutProp
           <span key={segment.label} style={{ width: segment.width }}>{segment.label}</span>
         ))}
       </div>
-      <p className="mt-2.5 text-14 leading-[1.6] text-[var(--muted)]">{plainEnglishCrackTime(bits)}</p>
+      <p className="mt-2.5 text-14 leading-[1.6] text-[var(--muted)]">{pageExplanationV1 ?? plainEnglishCrackTime(bits)}</p>
     </div>
   )
 }

@@ -17,6 +17,7 @@ interface GeneratorControlsProps {
     bits: number
     poolSize: number
     poolLabel?: string
+    pageExplanationV1?: string
   }
   /** Inline validation alert, e.g. "Select at least one character type to generate passwords." */
   error?: string | null
@@ -53,7 +54,7 @@ export function GeneratorControls({
 
       {readout && (
         <div className="mt-3 border-t border-[var(--hairline)] pt-3.5">
-          <EntropyReadout bits={readout.bits} poolSize={readout.poolSize} poolLabel={readout.poolLabel} />
+          <EntropyReadout bits={readout.bits} poolSize={readout.poolSize} poolLabel={readout.poolLabel} pageExplanationV1={readout.pageExplanationV1} />
         </div>
       )}
 
