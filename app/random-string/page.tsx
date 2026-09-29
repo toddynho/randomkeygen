@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import RandomStringPageClient from './RandomStringPageClient'
 
 export const metadata: Metadata = {
-  title: 'Random String Generator - Secure Custom Strings | RandomKeygen',
-  description: 'Generate secure random strings from 8 to 256 characters. Choose alphanumeric, numeric, hexadecimal, URL-safe, or a custom character set.',
+  title: 'Random String Generator - Free, Any Length | RandomKeygen',
+  description: 'Free random string generator: 8 to 256 characters, alphanumeric, numeric, hex, URL-safe or custom charset. Cryptographically secure, generated in your browser.',
   keywords: ['random string generator', 'random string', 'generate random string', 'alphanumeric generator', 'hex string generator', 'secure random'],
   openGraph: {
-    title: 'Random String Generator - Secure Custom Strings',
-    description: 'Generate secure random strings with custom length and alphanumeric, numeric, hex, URL-safe, or custom character sets.',
+    title: 'Random String Generator - Free, Any Length',
+    description: 'Free random string generator: 8 to 256 characters, alphanumeric, numeric, hex, URL-safe or custom charset. Cryptographically secure, generated in your browser.',
     url: 'https://randomkeygen.com/random-string',
   },
   alternates: {
