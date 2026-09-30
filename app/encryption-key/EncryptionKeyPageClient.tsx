@@ -410,7 +410,11 @@ decrypted += decipher.final('utf8');`}
       </section>
 
       {/* Related Content */}
-      <RelatedContent {...encryptionRelated} />
+      <RelatedContent {...encryptionRelated} tools={[
+        ...(encryptionRelated.tools || []),
+        { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
+        { href: '/wireguard-key', label: 'WireGuard key generator', description: 'Local VPN key generation guide' },
+      ]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

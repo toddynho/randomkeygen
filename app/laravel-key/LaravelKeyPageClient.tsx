@@ -15,6 +15,7 @@ import {
   TerminalCommand,
   BulkGenerator,
   CodeBlock,
+  RelatedContent,
 } from '../components'
 
 interface LaravelKeyPageClientProps {
@@ -179,6 +180,8 @@ export default function LaravelKeyPageClient({ breadcrumbItems }: LaravelKeyPage
           />
         </div>
       </section>
+
+      <RelatedContent tools={[{ href: '/wireguard-key', label: 'WireGuard key generator', description: 'Local VPN key generation guide' }]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

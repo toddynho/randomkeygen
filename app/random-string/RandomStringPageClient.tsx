@@ -215,7 +215,7 @@ export default function RandomStringPage() {
         </div>
       </section>
 
-      <RelatedContent {...developerRelated} />
+      <RelatedContent {...developerRelated} tools={[...(developerRelated.tools || []), { href: '/username-generator', label: 'username generator', description: 'Create random usernames' }]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

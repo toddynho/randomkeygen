@@ -187,7 +187,7 @@ app.use(session({
         </div>
       </section>
 
-      <RelatedContent {...encryptionRelated} />
+      <RelatedContent {...encryptionRelated} tools={[...(encryptionRelated.tools || []), { href: '/username-generator', label: 'username generator', description: 'Create random usernames' }]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>
