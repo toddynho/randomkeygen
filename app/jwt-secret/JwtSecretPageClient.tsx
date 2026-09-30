@@ -9,6 +9,7 @@ import {
   OutputDisplay,
   ControlField,
   BulkGenerator,
+  RelatedContent,
   Toast,
   useToast,
   useRegenerateHotkey,
@@ -232,6 +233,11 @@ export default function JwtSecretPageClient({
 
       {/* Terminal Commands */}
       <JwtTerminalCommands bytes={secretBytes} bits={secretBits} />
+
+      <RelatedContent tools={[
+        { href: '/username-generator', label: 'username generator', description: 'Create random usernames' },
+        { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
+      ]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

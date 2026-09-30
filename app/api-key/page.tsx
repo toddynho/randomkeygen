@@ -117,7 +117,10 @@ export default function ApiKeyPage() {
     <ApiKeyPageClient
       breadcrumbItems={breadcrumbItems}
       schema={[apiKeyToolSchema, apiKeyHowToSchema]}
-      relatedContent={developerRelated}
+      relatedContent={{ ...developerRelated, tools: [
+        ...(developerRelated.tools || []),
+        { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
+      ] }}
       howToSteps={howToSteps}
       howToHeading="How to Generate Secure API Keys"
     />
