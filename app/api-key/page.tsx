@@ -120,6 +120,7 @@ export default function ApiKeyPage() {
       relatedContent={{ ...developerRelated, tools: [
         ...(developerRelated.tools || []),
         { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
+        { href: '/ai-key-generator', label: 'OpenAI API key generator', description: 'OpenAI, Anthropic & Google AI formats' },
       ] }}
       howToSteps={howToSteps}
       howToHeading="How to Generate Secure API Keys"

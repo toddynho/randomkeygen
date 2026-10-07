@@ -181,7 +181,7 @@ export default function LaravelKeyPageClient({ breadcrumbItems }: LaravelKeyPage
         </div>
       </section>
 
-      <RelatedContent tools={[{ href: '/wireguard-key', label: 'WireGuard key generator', description: 'Local VPN key generation guide' }]} />
+      <RelatedContent tools={[{ href: '/wireguard-key', label: 'WireGuard key generator', description: 'Local VPN key generation guide' }, { href: '/flask-secret-key', label: 'Flask secret key generator', description: 'SECRET_KEY for sessions and CSRF' }]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>
