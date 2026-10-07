@@ -135,6 +135,27 @@ const id = uuidv4();`}
           </div>
         </section>
 
+        {/* Random UUID v4 explainer */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Random UUID v4 (uuidv4) Generator</h2>
+          <div className="space-y-3 text-14 leading-[1.6] text-[var(--muted)]">
+            <p>
+              A uuidv4 is a random 128-bit identifier defined by RFC 4122. Unlike v1 UUIDs, which embed a
+              timestamp and MAC address, a version 4 UUID is built almost entirely from random bits: 122 of
+              its 128 bits are random, and the remaining 6 mark the version and variant.
+            </p>
+            <p>
+              This random UUID generator draws 16 bytes from the Web Crypto API in your browser, sets the
+              version-4 and variant bits, and formats the result as 32 hex characters. Nothing is sent to a
+              server, and no UUID is logged or stored.
+            </p>
+            <p>
+              Use the Format option above to output lowercase, uppercase, or no-dash GUIDs, regenerate a
+              single row, or download a bulk CSV of random UUIDs.
+            </p>
+          </div>
+        </section>
+
         {/* Info */}
         <section className="mb-8">
           <SecurityNotice type="info" title="UUID v4 structure">

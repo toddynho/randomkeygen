@@ -3,8 +3,8 @@ import UuidPageClient from './UuidPageClient'
 
 export const metadata: Metadata = {
   title: 'UUID Generator - Free Random UUID v4 & GUIDs | RandomKeygen',
-  description: 'Generate random UUID v4 and GUID values in standard, uppercase, or no-dash formats. Create one or bulk identifiers locally in your browser.',
-  keywords: ['UUID generator', 'UUID v4', 'GUID generator', 'unique identifier', 'random UUID', 'RFC 4122'],
+  description: 'Free random UUID generator: create UUID v4 (uuidv4) and GUID values in standard, uppercase, or no-dash formats. Generate one or bulk identifiers locally in your browser.',
+  keywords: ['UUID generator', 'UUID v4', 'uuidv4', 'GUID generator', 'unique identifier', 'random UUID', 'RFC 4122'],
   openGraph: {
     title: 'UUID Generator - Free Random UUID v4 & GUIDs',
     description: 'Generate random UUID v4 and GUID values in standard, uppercase, or no-dash formats.',
