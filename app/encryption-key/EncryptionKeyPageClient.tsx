@@ -414,6 +414,7 @@ decrypted += decipher.final('utf8');`}
         ...(encryptionRelated.tools || []),
         { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
         { href: '/wireguard-key', label: 'WireGuard key generator', description: 'Local VPN key generation guide' },
+        { href: '/ai-key-generator', label: 'OpenAI API key generator', description: 'OpenAI, Anthropic & Google AI formats' },
       ]} />
 
       <Toast message={toastMessage} />

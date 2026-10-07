@@ -237,6 +237,8 @@ export default function JwtSecretPageClient({
       <RelatedContent tools={[
         { href: '/username-generator', label: 'username generator', description: 'Create random usernames' },
         { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
+        { href: '/ai-key-generator', label: 'OpenAI API key generator', description: 'OpenAI, Anthropic & Google AI formats' },
+        { href: '/flask-secret-key', label: 'Flask secret key generator', description: 'SECRET_KEY for sessions and CSRF' },
       ]} />
 
       <Toast message={toastMessage} />
