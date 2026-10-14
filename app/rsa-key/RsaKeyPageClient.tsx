@@ -248,6 +248,31 @@ export default function RsaKeyPageClient({ breadcrumbItems, schema }: RsaKeyPage
         </div>
       </section>
 
+      {/* What is an RSA key? */}
+      <section className="mb-8">
+        <h2 className="mb-4 text-2xl font-semibold">What is an RSA key?</h2>
+        <p className="mb-4 max-w-[75ch] text-15 leading-[1.65] text-[var(--body)]">
+          An RSA key is one half of a mathematically linked key pair used for public-key cryptography. The public key
+          can be shared freely and is used to encrypt data or verify a signature; the private key stays secret and is
+          used to decrypt that data or create the signature. Because the two keys are related but one cannot be
+          derived from the other, RSA lets two parties communicate securely without first exchanging a shared secret.
+        </p>
+        <p className="mb-4 max-w-[75ch] text-15 leading-[1.65] text-[var(--body)]">
+          Key size is measured in bits: 2048-bit keys are the current standard, and 4096-bit keys are used where
+          long-term protection matters. RSA keys are typically stored as PEM files and are used for TLS/SSL
+          certificates, code and document signing, JWT signing (RS256), and SSH authentication. If you need a key
+          pair for logging in to a server, use the{' '}
+          <Link href="/ssh-key" className="font-semibold text-[var(--accent-strong)] hover:underline">
+            SSH key generator
+          </Link>{' '}
+          and follow the{' '}
+          <Link href="/guides/ssh-setup" className="font-semibold text-[var(--accent-strong)] hover:underline">
+            SSH key setup guide
+          </Link>
+          .
+        </p>
+      </section>
+
       {/* What is RSA? */}
       <section className="mb-8">
         <h2 className="mb-4 text-2xl font-semibold">What is RSA Encryption?</h2>
