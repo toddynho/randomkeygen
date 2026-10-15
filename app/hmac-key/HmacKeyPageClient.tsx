@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { generators } from '../lib/crypto'
 import {
   GeneratorLayout,
@@ -187,6 +188,9 @@ print(signature)`}
             signatures while ensuring only someone with the secret key could have created the hash.
           </p>
 
+          <p className="mb-4">
+            For an unkeyed hash of text or a file instead of an HMAC secret, use the{' '}
+            <Link href="/sha256-generator" className="font-semibold text-[var(--accent)] hover:underline">SHA-256 hash generator</Link>.</p>
           <div className="grid md:grid-cols-3 gap-6 mb-6">
             <div className="card p-4">
               <h3 className="font-semibold mb-2">🔐 Authentication</h3>
