@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { generators } from '../lib/crypto'
 import {
   GeneratorLayout,
@@ -205,6 +206,12 @@ $isValid = $ga->checkCode($secret, $userCode);`}
             <li>Uses Unix timestamp divided by 30-second intervals</li>
             <li>Base32 encoding makes secrets easy to type manually</li>
           </ul>
+          <p className="mt-2">
+            Explore the encoding with the{' '}
+            <Link href="/base32-encode" className="font-semibold text-[var(--accent)] hover:underline">base32 encode</Link>{' '}
+            tool, or calculate a current code from a test secret with the{' '}
+            <Link href="/totp-generator" className="font-semibold text-[var(--accent)] hover:underline">TOTP generator</Link>.
+          </p>
         </SecurityNotice>
       </section>
 

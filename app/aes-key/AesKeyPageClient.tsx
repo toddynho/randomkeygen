@@ -135,6 +135,11 @@ export default function AesKeyPageClient({ breadcrumbItems }: AesKeyPageClientPr
         onRegenerate={regenerateIv}
       />
 
+      <p className="mb-8 text-sm text-[var(--muted)]">
+        For hex or Base64 output, use the{' '}
+        <Link href="/aes-256-key" className="font-semibold text-[var(--accent)] hover:underline">256-bit AES encryption key generator</Link>.
+      </p>
+
       {/* Usage */}
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Usage Example</h2>

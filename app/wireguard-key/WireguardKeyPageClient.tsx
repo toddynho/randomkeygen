@@ -173,6 +173,10 @@ PersistentKeepalive = 25`}
           <Link href="/guides" className="font-semibold text-[var(--accent-strong)] hover:underline">
             security guides →
           </Link>
+          <p className="mt-2">
+            To explore password strength separately from WireGuard keys, try the{' '}
+            <Link href="/password-entropy-calculator" className="font-semibold text-[var(--accent-strong)] hover:underline">password entropy calculator</Link>.
+          </p>
         </GuideCallout>
       </section>
     </GeneratorLayout>
