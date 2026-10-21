@@ -121,6 +121,7 @@ export const encryptionRelated: RelatedContentProps = {
     { href: '/hmac-key', label: 'HMAC Key Generator', description: 'Message authentication keys' },
     { href: '/hash-generator', label: 'Hash Generator', description: 'SHA256, SHA512, MD5' },
     { href: '/encryption-key', label: 'Encryption Keys', description: 'Hex keys for encryption' },
+    { href: '/aes-256-key', label: 'AES-256 Key Generator', description: 'Hex or Base64 256-bit keys' },
   ],
   guides: [
     { href: '/guides/encryption-explained', title: 'Encryption Explained: AES vs RSA' },
@@ -141,6 +142,7 @@ export const developerRelated: RelatedContentProps = {
     { href: '/django-secret-key', label: 'Django Secret Key', description: 'For Django settings' },
     { href: '/uuid', label: 'UUID Generator', description: 'Unique identifiers' },
     { href: '/backup-codes', label: 'Backup Codes', description: '2FA recovery codes' },
+    { href: '/base32-encode', label: 'Base32 Encoder', description: 'Text to Base32 encoding' },
   ],
   guides: [
     { href: '/guides/api-key-best-practices', title: 'API Key Best Practices' },
