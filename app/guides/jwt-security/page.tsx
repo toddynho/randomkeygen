@@ -36,6 +36,7 @@ const articleSchema = {
   '@type': 'TechArticle',
   headline: 'JWT Security Best Practices',
   description: 'A practical guide to implementing JSON Web Tokens securely.',
+  datePublished: '2026-08-18',
   dateModified: '2026-08-18',
   author: { '@type': 'Organization', name: 'RandomKeygen' },
   publisher: { '@type': 'Organization', name: 'RandomKeygen', url: 'https://randomkeygen.com' },
@@ -57,7 +58,7 @@ export default function JwtSecurityPage() {
             <p className="guide-deck">
               Everything you need to know about implementing JSON Web Tokens securely — algorithms, secret keys, common attacks, and safe storage.
             </p>
-            <p className="guide-byline">Updated August 2026 · Reviewed by the RandomKeygen team</p>
+            <p className="guide-byline">12 min read · <time dateTime="2026-08-18">Updated August 18, 2026</time> · Reviewed by the RandomKeygen team</p>
           </header>
 
           <h2 id="understanding">Understanding JWT security</h2>
