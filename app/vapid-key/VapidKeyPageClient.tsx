@@ -123,23 +123,20 @@ export default function VapidKeyPageClient({ breadcrumbItems, schema }: VapidKey
         ['sign', 'verify']
       )
 
-      // Export public key in raw format (uncompressed point)
-      const publicKeyBuffer = await window.crypto.subtle.exportKey('raw', pair.publicKey)
-      // Export private key in PKCS8 format, then extract the raw key
-      const privateKeyBuffer = await window.crypto.subtle.exportKey('pkcs8', pair.privateKey)
-
-      // For VAPID, we need the raw 32-byte private key.
-      // PKCS8 for P-256 has the raw key as the last 32 bytes of the structure.
-      const privateKeyArray = new Uint8Array(privateKeyBuffer)
-      const rawPrivateKey = privateKeyArray.slice(-32)
+      // VAPID uses the uncompressed public point and the raw private scalar.
+      // Web Crypto exposes the private scalar as JWK `d`; slicing PKCS#8 bytes is
+      // not safe because the encoding may include the public point after it.
+      const [publicKeyBuffer, privateKeyJwk] = await Promise.all([
+        window.crypto.subtle.exportKey('raw', pair.publicKey),
+        window.crypto.subtle.exportKey('jwk', pair.privateKey),
+      ])
+      if (!privateKeyJwk.d) throw new Error('Failed to export VAPID private key')
 
       if (id !== requestId.current) return false // stale result — a newer request superseded it
 
       setKeyPair({
         publicKey: arrayBufferToUrlSafeBase64(publicKeyBuffer),
-        privateKey: arrayBufferToUrlSafeBase64(
-          rawPrivateKey.buffer.slice(rawPrivateKey.byteOffset, rawPrivateKey.byteOffset + rawPrivateKey.byteLength)
-        ),
+        privateKey: privateKeyJwk.d,
       })
       return true
     } catch (error) {
