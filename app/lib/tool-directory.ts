@@ -133,6 +133,7 @@ export const TOOL_DIRECTORY: DirectoryCategory[] = [
           { href: '/hmac-key', name: 'HMAC Key', blurb: 'SHA-256/384/512 secrets' },
           { href: '/secret-key', name: 'Secret Key', blurb: 'General-purpose secrets' },
           { href: '/salt', name: 'Salt Generator', blurb: 'Cryptographic salts for hashing' },
+          { href: '/openssl-rand-hex', name: 'OpenSSL rand -hex', blurb: 'Random hex strings, 16/32/64 bytes' },
         ],
       },
       {
