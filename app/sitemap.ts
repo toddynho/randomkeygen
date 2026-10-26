@@ -72,6 +72,7 @@ const routes: SitemapRoute[] = [
   { path: '/hmac-key', priority: 0.8 },
   { path: '/salt', priority: 0.8 },
   { path: '/secret-key', priority: 0.8 },
+  { path: '/openssl-rand-hex', priority: 0.8 },
   { path: '/ssh-key', priority: 0.8 },
   { path: '/pgp-key', priority: 0.7 },
   { path: '/webauthn-credential', priority: 0.8 },

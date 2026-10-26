@@ -187,7 +187,7 @@ app.use(session({
         </div>
       </section>
 
-      <RelatedContent {...encryptionRelated} tools={[...(encryptionRelated.tools || []), { href: '/username-generator', label: 'username generator', description: 'Create random usernames' }, { href: '/flask-secret-key', label: 'Flask secret key generator', description: 'SECRET_KEY for sessions and CSRF' }]} />
+      <RelatedContent {...encryptionRelated} tools={[...(encryptionRelated.tools || []), { href: '/username-generator', label: 'username generator', description: 'Create random usernames' }, { href: '/flask-secret-key', label: 'Flask secret key generator', description: 'SECRET_KEY for sessions and CSRF' }, { href: '/openssl-rand-hex', label: 'openssl rand -hex 32 generator', description: 'Random hex strings with the matching OpenSSL command' }]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

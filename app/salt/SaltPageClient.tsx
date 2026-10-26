@@ -15,6 +15,7 @@ import {
   TerminalCommand,
   BulkGenerator,
   CodeBlock,
+  RelatedContent,
 } from '../components'
 
 const breadcrumbItems = [
@@ -207,6 +208,8 @@ const hash = crypto.pbkdf2Sync(
           />
         </div>
       </section>
+
+      <RelatedContent tools={[{ href: '/openssl-rand-hex', label: 'openssl rand -hex 32 generator', description: 'Random hex strings with the matching OpenSSL command' }, { href: '/secret-key', label: 'Secret key generator', description: 'Base64, hex and URL-safe secrets' }]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>
