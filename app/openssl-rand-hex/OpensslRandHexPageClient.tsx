@@ -158,7 +158,7 @@ WEBHOOK_SECRET=${values[2] || '...'}`}
 
       {/* Info */}
       <section className="mb-8">
-        <SecurityNotice type="info" title="Hex or Base64?">
+        <SecurityNotice type="info" title="Hex or Base64?" titleAs="h2">
           <ul className="list-disc list-inside space-y-1 text-sm">
             <li><strong>Hex</strong> is safe to paste anywhere: only 0-9 and a-f, no symbols to escape in shells, URLs or config files</li>
             <li><strong>Base64</strong> is about a third shorter but can include <code>+</code>, <code>/</code> and <code>=</code></li>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import ApiKeyPageClient from './ApiKeyPageClient'
-import { developerRelated } from '../components'
+import { developerRelated } from '../components/related-content-data'
 
 export const metadata: Metadata = {
   title: 'API Key Generator - Custom Prefixes & Lengths | RandomKeygen',

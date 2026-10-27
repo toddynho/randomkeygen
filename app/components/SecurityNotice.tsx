@@ -1,10 +1,14 @@
 interface SecurityNoticeProps {
   type: 'info' | 'warning' | 'danger'
   title?: string
+  /** Element for `title`. Defaults to a paragraph so existing callouts stay put. */
+  titleAs?: 'p' | 'h2' | 'h3'
   children: React.ReactNode
 }
 
-export function SecurityNotice({ type, title, children }: SecurityNoticeProps) {
+export function SecurityNotice({ type, title, titleAs = 'p', children }: SecurityNoticeProps) {
+  const TitleTag = titleAs
+
   return (
     <div className={`security-notice ${type}`}>
       <div className="flex-shrink-0 mt-0.5">
@@ -13,7 +17,7 @@ export function SecurityNotice({ type, title, children }: SecurityNoticeProps) {
         {type === 'danger' && <DangerIcon />}
       </div>
       <div>
-        {title && <p className="font-medium mb-1">{title}</p>}
+        {title && <TitleTag className="font-medium mb-1">{title}</TitleTag>}
         <div className="text-[var(--muted)]">{children}</div>
       </div>
     </div>
