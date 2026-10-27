@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import MD5HashGenerator from '../components/MD5HashGenerator'
-import { RelatedContent, developerRelated } from '../components/RelatedContent'
+import { RelatedContent } from '../components/RelatedContent'
+import { developerRelated } from '../components/related-content-data'
 import { GeneratorLayout } from '../components'
 
 export const metadata: Metadata = {
