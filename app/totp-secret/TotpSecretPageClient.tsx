@@ -210,7 +210,12 @@ $isValid = $ga->checkCode($secret, $userCode);`}
             Explore the encoding with the{' '}
             <Link href="/base32-encode" className="font-semibold text-[var(--accent)] hover:underline">base32 encode</Link>{' '}
             tool, or calculate a current code from a test secret with the{' '}
-            <Link href="/totp-generator" className="font-semibold text-[var(--accent)] hover:underline">TOTP generator</Link>.
+            <Link href="/totp-generator" className="font-semibold text-[var(--accent)] hover:underline">TOTP generator</Link>
+            {' '}(QR code and otpauth URI). Store one-time{' '}
+            <Link href="/backup-codes" className="font-semibold text-[var(--accent)] hover:underline">backup codes</Link>
+            {' '}with the secret. TOTP itself is HMAC-SHA1 — see the{' '}
+            <Link href="/hmac-key" className="font-semibold text-[var(--accent)] hover:underline">HMAC key generator</Link>
+            {' '}for other HMAC secrets.
           </p>
         </SecurityNotice>
       </section>

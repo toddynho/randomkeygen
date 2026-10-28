@@ -453,6 +453,7 @@ export default function Base32EncodePageClient() {
         <h2 className="text-xl font-semibold mb-4">Related Encoding Tools</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {[
+            { href: '/totp-generator', title: 'TOTP generator', body: 'Base32 secrets, a QR code, and the current 6-digit code' },
             { href: '/random-string', title: 'Random String Generator', body: 'Create secure strings in multiple formats' },
             { href: '/hash-generator', title: 'Hash Generator', body: 'Create checksums and secure hashes' },
             { href: '/api-key', title: 'API Key Generator', body: 'Generate secure application credentials' },

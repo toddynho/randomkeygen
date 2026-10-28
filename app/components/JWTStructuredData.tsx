@@ -8,7 +8,7 @@ interface JWTStructuredDataProps {
 }
 
 export function JWTStructuredData({ 
-  pageUrl = 'https://randomkeygen.com/jwt-token',
+  pageUrl = 'https://randomkeygen.com/jwt-generator',
   includeArticle = true,
   includeFAQ = true 
 }: JWTStructuredDataProps) {

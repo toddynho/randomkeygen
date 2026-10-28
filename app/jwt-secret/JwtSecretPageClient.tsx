@@ -135,6 +135,9 @@ export default function JwtSecretPageClient({
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-1.5 text-14 font-semibold">
+            <Link href="/jwt-generator" className="text-[var(--accent)] hover:underline">
+              JWT token generator →
+            </Link>
             <Link href="/guides/jwt-security" className="text-[var(--accent)] hover:underline">
               JWT security guide →
             </Link>
@@ -235,6 +238,7 @@ export default function JwtSecretPageClient({
       <JwtTerminalCommands bytes={secretBytes} bits={secretBits} />
 
       <RelatedContent tools={[
+        { href: '/jwt-generator', label: 'JWT token generator', description: 'Sign and inspect HS256 and RS256 tokens' },
         { href: '/username-generator', label: 'username generator', description: 'Create random usernames' },
         { href: '/vapid-key', label: 'VAPID keys', description: 'Generate Web Push key pairs' },
         { href: '/ai-key-generator', label: 'OpenAI API key generator', description: 'OpenAI, Anthropic & Google AI formats' },

@@ -10,6 +10,7 @@ const authenticatorRelated = {
     { href: '/totp-secret', label: 'TOTP Secret Generator', description: 'Generate Base32 secrets only' },
     { href: '/totp-generator', label: 'TOTP Code Generator', description: 'Calculate current codes from a secret' },
     { href: '/backup-codes', label: 'Backup Codes', description: 'Generate 2FA recovery codes' },
+    { href: '/hmac-key', label: 'HMAC key', description: 'TOTP codes are an HMAC of the time counter' },
     { href: '/recovery-key', label: 'Recovery Key', description: 'Generate account recovery keys' },
   ],
   guides: [

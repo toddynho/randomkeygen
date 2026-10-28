@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import { GeneratorLayout, SecurityNotice, CodeBlock } from '../components'
+import { FaqList } from '../components/FaqList'
+import { totpFaqs } from './content'
 
 // TOTP implementation following RFC 6238
 function base32Decode(encoded: string): Uint8Array {
@@ -104,6 +106,79 @@ const breadcrumbItems = [
   { name: 'TOTP Generator', url: '/totp-generator' },
 ]
 
+const relatedTools = [
+  { href: '/totp-secret', title: 'TOTP secret', body: 'Generate a fresh Base32 setup key.' },
+  { href: '/totp-authenticator', title: 'Authenticator setup', body: 'Build a scannable otpauth QR for a new account.' },
+  { href: '/backup-codes', title: 'Backup codes', body: 'One-time recovery codes for when the authenticator is gone.' },
+  { href: '/hmac-key', title: 'HMAC key', body: 'TOTP is HMAC-SHA1 of the time counter. Generate HMAC secrets here.' },
+  { href: '/base32-encode', title: 'Base32 encoder', body: 'Encode or decode the alphabet TOTP secrets use.' },
+  { href: '/recovery-key', title: 'Recovery key', body: 'Longer account recovery keys, separate from rotating codes.' },
+]
+
+function OtpAuthQr({ text }: { text: string }) {
+  const [cells, setCells] = useState<boolean[] | null>(null)
+  const [size, setSize] = useState(0)
+
+  useEffect(() => {
+    if (!text) {
+      setCells(null)
+      setSize(0)
+      return
+    }
+    let cancelled = false
+    import('qrcode')
+      .then((mod) => {
+        const api = typeof mod.default?.create === 'function' ? mod.default : (mod as unknown as typeof mod.default)
+        const created = api.create(text, { errorCorrectionLevel: 'M' })
+        if (cancelled) return
+        const n = created.modules.size
+        const bits: boolean[] = []
+        for (let row = 0; row < n; row++) {
+          for (let col = 0; col < n; col++) bits.push(Boolean(created.modules.get(row, col)))
+        }
+        setSize(n)
+        setCells(bits)
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setCells(null)
+          setSize(0)
+        }
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [text])
+
+  if (!text || !cells || !size) {
+    return (
+      <div className="grid h-44 w-44 place-items-center rounded bg-[var(--band)] text-xs text-[var(--muted)]" role="status">
+        Drawing QR…
+      </div>
+    )
+  }
+
+  const dark = []
+  for (let index = 0; index < cells.length; index++) {
+    if (!cells[index]) continue
+    const row = Math.floor(index / size)
+    const col = index % size
+    dark.push(<rect key={`${col}-${row}`} x={col} y={row} width="1" height="1" />)
+  }
+
+  return (
+    <svg
+      role="img"
+      aria-label="QR code for the otpauth URI. Generated in this browser."
+      viewBox={`0 0 ${size} ${size}`}
+      className="h-44 w-44"
+    >
+      <rect width={size} height={size} fill="#ffffff" />
+      <g fill="#111827">{dark}</g>
+    </svg>
+  )
+}
+
 interface TOTPGeneratorClientProps {
   schema?: Record<string, unknown>[]
 }
@@ -165,8 +240,8 @@ export default function TOTPGeneratorClient({ schema }: TOTPGeneratorClientProps
 
   return (
     <GeneratorLayout
-      title="TOTP Code Generator"
-      description="Enter or create a Base32 secret to calculate the current 6-digit TOTP code, live in your browser. Compatible with Google Authenticator, Authy, and other 2FA apps."
+      title="TOTP Generator"
+      description="Create a Base32 secret, scan the QR code or copy the otpauth URI, and read the current 6-digit code. Works with Google Authenticator, Authy, and other RFC 6238 apps. The secret never leaves this browser."
       breadcrumbItems={breadcrumbItems}
       schema={schema}
     >
@@ -206,73 +281,47 @@ export default function TOTPGeneratorClient({ schema }: TOTPGeneratorClientProps
         </div>
       </section>
 
-      {/* Current TOTP Code */}
-      <section className="mb-6">
-        <div className="rounded-[14px] border border-[var(--accent-border)] bg-[var(--accent-soft)] p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-[var(--accent-strong)]">
-              Current TOTP Code
-            </h2>
-            <div className="text-sm text-[var(--accent-strong)]">
-              Refreshes in {totp.remaining}s
+      <section className="mb-6 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_240px]">
+        <div className="space-y-4">
+          <div className="rounded-[14px] border border-[var(--accent-border)] bg-[var(--accent-soft)] p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-[var(--accent-strong)]">
+                Current TOTP code
+              </h2>
+              <div className="text-sm text-[var(--accent-strong)]">
+                Refreshes in {totp.remaining}s
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="font-mono text-3xl font-bold tracking-[0.12em] text-[var(--accent-strong)]">
+                {totp.code || '••••••'}
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(totp.code, 'code')}
+                disabled={!totp.code || totp.code === 'Invalid'}
+                className={`btn btn-secondary ${!totp.code || totp.code === 'Invalid' ? 'invisible' : ''}`}
+              >
+                {copied === 'code' ? '✓ Copied' : 'Copy code'}
+              </button>
+            </div>
+
+            <div className="mt-4">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--accent-border)]">
+                <div
+                  className="h-2 rounded-full bg-[var(--accent)] transition-all duration-1000 ease-linear"
+                  style={{ width: `${(totp.remaining / 30) * 100}%` }}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="font-mono text-3xl font-bold tracking-[0.12em] text-[var(--accent-strong)]">
-              {totp.code || '••••••'}
-            </div>
-            <button
-              onClick={() => copyToClipboard(totp.code, 'code')}
-              disabled={!totp.code || totp.code === 'Invalid'}
-              className={`btn btn-secondary ${!totp.code || totp.code === 'Invalid' ? 'invisible' : ''}`}
-            >
-              {copied === 'code' ? '✓ Copied' : 'Copy code'}
-            </button>
-          </div>
-
-          <div className="mt-4">
-            <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--accent-border)]">
-              <div
-                className="h-2 rounded-full bg-[var(--accent)] transition-all duration-1000 ease-linear"
-                style={{ width: `${(totp.remaining / 30) * 100}%` }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Cross-links to the other TOTP tools */}
-      <section className="mb-6 grid gap-4 md:grid-cols-2">
-        <Link
-          href="/totp-secret"
-          className="card card-hover p-4"
-        >
-          <h3 className="mb-1 font-medium">Need a new secret?</h3>
-          <p className="text-sm text-[var(--muted)]">
-            Generate a fresh Base32 TOTP setup key with the TOTP Secret Generator →
-          </p>
-        </Link>
-        <Link
-          href="/totp-authenticator"
-          className="card card-hover p-4"
-        >
-          <h3 className="mb-1 font-medium">Want a QR code?</h3>
-          <p className="text-sm text-[var(--muted)]">
-            Build a scannable otpauth QR setup for your authenticator app →
-          </p>
-        </Link>
-      </section>
-
-      {/* otpauth URL setup */}
-      <section className="mb-8">
-        <div className="card p-5">
-          <h2 className="mb-4 text-xl font-semibold">Setup in Authenticator App</h2>
-
-          <div className="space-y-4">
+          <div className="card p-5">
+            <h2 className="mb-4 text-xl font-semibold">otpauth URI</h2>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="form-label" htmlFor="totp-account">Account Name</label>
+                <label className="form-label" htmlFor="totp-account">Account name</label>
                 <input
                   id="totp-account"
                   type="text"
@@ -282,7 +331,6 @@ export default function TOTPGeneratorClient({ schema }: TOTPGeneratorClientProps
                   placeholder="user@example.com"
                 />
               </div>
-
               <div>
                 <label className="form-label" htmlFor="totp-issuer">Issuer</label>
                 <input
@@ -295,9 +343,8 @@ export default function TOTPGeneratorClient({ schema }: TOTPGeneratorClientProps
                 />
               </div>
             </div>
-
-            <div>
-              <label className="form-label" htmlFor="totp-url">OTPAuth URL</label>
+            <div className="mt-4">
+              <label className="form-label" htmlFor="totp-url">otpauth URI</label>
               <div className="flex gap-2">
                 <input
                   id="totp-url"
@@ -307,6 +354,7 @@ export default function TOTPGeneratorClient({ schema }: TOTPGeneratorClientProps
                   className="form-input flex-1 font-mono text-xs"
                 />
                 <button
+                  type="button"
                   onClick={() => copyToClipboard(otpauthUrl, 'url')}
                   disabled={!otpauthUrl}
                   className={`btn btn-secondary ${otpauthUrl ? '' : 'invisible'}`}
@@ -315,15 +363,30 @@ export default function TOTPGeneratorClient({ schema }: TOTPGeneratorClientProps
                 </button>
               </div>
               <p className="mt-1 text-xs text-[var(--muted)]">
-                Paste into an authenticator that accepts otpauth URLs, or use the{' '}
-                <Link href="/totp-authenticator" className="font-semibold text-[var(--accent-strong)] hover:underline">
-                  QR setup tool
-                </Link>{' '}
-                to scan it. The URL contains your secret — share it only over secure channels.
+                The URI contains the secret. The QR code is drawn from it in this browser — it is not sent to a QR service.
               </p>
             </div>
           </div>
         </div>
+
+        <div className="card p-4">
+          <h2 className="mb-3 text-sm font-semibold">QR code</h2>
+          <div className="flex justify-center rounded bg-white p-3">
+            <OtpAuthQr text={otpauthUrl} />
+          </div>
+          <p className="mt-2 text-xs text-[var(--muted)]">
+            Scan with Google Authenticator, Authy, or any RFC 6238 app.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedTools.map((tool) => (
+          <Link key={tool.href} href={tool.href} className="card card-hover p-4">
+            <h3 className="mb-1 font-medium">{tool.title}</h3>
+            <p className="text-sm text-[var(--muted)]">{tool.body}</p>
+          </Link>
+        ))}
       </section>
 
       {/* Setup Instructions */}
@@ -484,6 +547,11 @@ print(f'TOTP Code: {code}')`}
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="mb-6 text-xl font-semibold">Frequently asked questions</h2>
+        <FaqList items={totpFaqs} />
       </section>
     </GeneratorLayout>
   )

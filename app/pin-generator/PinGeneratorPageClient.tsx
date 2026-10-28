@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { generators } from '../lib/crypto'
 import {
   GeneratorLayout,
@@ -224,6 +225,12 @@ export default function PinGeneratorPageClient() {
           </p>
         </div>
       </section>
+
+      <p className="mb-6 text-14">
+        <Link href="/password-entropy-calculator" className="font-semibold text-[var(--accent)] hover:underline">
+          Compare a PIN with a longer secret in the password entropy calculator →
+        </Link>
+      </p>
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

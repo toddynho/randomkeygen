@@ -178,6 +178,17 @@ const generators: Generator[] = [
     useCases: ['Web authentication', 'Microservices', 'Session management']
   },
   {
+    id: 'jwt-generator',
+    name: 'JWT Token Generator',
+    description: 'Sign, decode, and verify HS256 and RS256 tokens in the browser',
+    href: '/jwt-generator',
+    category: 'development',
+    icon: 'code',
+    popular: true,
+    security: 'high',
+    useCases: ['Local API tests', 'Inspecting tokens', 'HS256 and RS256 examples']
+  },
+  {
     id: 'uuid',
     name: 'UUID Generator',
     description: 'Generate unique identifiers (UUIDs) for databases and applications',

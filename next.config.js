@@ -9,7 +9,7 @@ const nextConfig = {
       { source: '/hmac-generator', destination: '/hmac-key', statusCode: 301 },
       { source: '/md5-generator', destination: '/md5-hash', statusCode: 301 },
       { source: '/uuid-generator', destination: '/uuid', statusCode: 301 },
-      { source: '/jwt-token', destination: '/jwt-secret', statusCode: 301 },
+      { source: '/jwt-token', destination: '/jwt-generator', statusCode: 301 },
 
       // Preserve external links to older navigation and guide URLs.
       { source: '/all-tools', destination: '/keygen-hub', statusCode: 301 },

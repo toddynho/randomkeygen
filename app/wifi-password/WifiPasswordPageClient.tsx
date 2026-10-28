@@ -525,6 +525,12 @@ export default function WifiPasswordPage() {
         />
       </section>
 
+      <p className="mb-6 text-14">
+        <Link href="/password-entropy-calculator" className="font-semibold text-[var(--accent)] hover:underline">
+          Check this length and character set in the password entropy calculator →
+        </Link>
+      </p>
+
       <Toast message={toastMessage} />
     </GeneratorLayout>
   )

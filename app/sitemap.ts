@@ -44,6 +44,7 @@ const routes: SitemapRoute[] = [
   { path: '/ai-key-generator', priority: 0.9 },
   { path: '/api-key', priority: 0.9 },
   { path: '/jwt-secret', priority: 0.9 },
+  { path: '/jwt-generator', priority: 0.9 },
   { path: '/oauth-token', priority: 0.8 },
   { path: '/uuid', priority: 0.9 },
   { path: '/random-string', priority: 0.9 },

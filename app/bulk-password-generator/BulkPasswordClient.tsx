@@ -246,6 +246,12 @@ export default function BulkPasswordClient() {
         </ul>
       </SecurityNotice>
 
+      <p className="mt-6 text-14">
+        <Link href="/password-entropy-calculator" className="font-semibold text-[var(--accent)] hover:underline">
+          See the entropy of this length and character set →
+        </Link>
+      </p>
+
       <Toast message={toastMessage} />
     </GeneratorLayout>
   )

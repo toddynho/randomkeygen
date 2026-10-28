@@ -189,6 +189,12 @@ IMPORTANT: Store these codes securely. They provide access to your account if yo
         </ul>
       </SecurityNotice>
 
+      <p className="mt-6 text-14">
+        Backup codes are for when the authenticator is unavailable. The rotating code itself comes from a{' '}
+        <Link href="/totp-generator" className="font-semibold text-[var(--accent)] hover:underline">TOTP generator</Link>
+        {' '}secret.
+      </p>
+
       <Toast message={toastMessage} />
     </GeneratorLayout>
   )

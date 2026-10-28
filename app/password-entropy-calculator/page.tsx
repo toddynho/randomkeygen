@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import EntropyCalculatorClient from './EntropyCalculatorClient'
+import { entropyFaqs } from './content'
 
 export const metadata: Metadata = {
-  title: 'Password Entropy Calculator - Analyze Password Strength & Security | RandomKeygen',
-  description: 'Calculate password entropy, strength ratings, and time-to-crack estimates. Analyze character sets, visualize security levels, and get recommendations for stronger passwords.',
-  keywords: ['password entropy calculator', 'password strength', 'password security', 'entropy bits', 'password analysis', 'time to crack', 'password meter'],
+  title: 'Password Entropy Calculator - Bits and Crack Time | RandomKeygen',
+  description: 'Password entropy calculator: bits of entropy and estimated crack time update as you change length and character set, or type a password. The math runs in your browser.',
+  keywords: ['password entropy', 'password entropy calculator', 'password strength', 'entropy bits', 'time to crack', 'password analysis'],
   openGraph: {
-    title: 'Password Entropy Calculator - Analyze Password Strength & Security',
-    description: 'Calculate password entropy, strength ratings, and time-to-crack estimates. Analyze character sets and get security recommendations.',
+    title: 'Password Entropy Calculator - Bits and Crack Time',
+    description: 'See password entropy in bits and estimated crack time as you change length, character set, or the password itself.',
     url: 'https://randomkeygen.com/password-entropy-calculator',
   },
   alternates: {
@@ -43,6 +44,19 @@ const webApplicationSchema = {
   ]
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: entropyFaqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+}
+
 const breadcrumbItems = [
   { name: 'Home', url: '/' },
   { name: 'Password Generators', url: '/passwords' },
@@ -53,7 +67,7 @@ export default function PasswordEntropyCalculatorPage() {
   return (
     <EntropyCalculatorClient
       breadcrumbItems={breadcrumbItems}
-      schema={[webApplicationSchema]}
+      schema={[webApplicationSchema, faqSchema]}
     />
   )
 }

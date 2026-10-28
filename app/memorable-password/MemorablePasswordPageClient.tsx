@@ -285,6 +285,12 @@ export default function MemorablePasswordPageClient({ breadcrumbItems }: Memorab
         />
       </section>
 
+      <p className="mt-6 text-14">
+        <Link href="/password-entropy-calculator" className="font-semibold text-[var(--accent)] hover:underline">
+          How many bits is this? Password entropy calculator →
+        </Link>
+      </p>
+
       <Toast message={toastMessage} />
     </GeneratorLayout>
   )

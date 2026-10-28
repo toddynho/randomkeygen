@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { generators, EFF_WORDLIST, LOWERCASE, UPPERCASE, DIGITS, SYMBOLS_SAFE } from '../lib/crypto'
 import {
   GeneratorLayout,
@@ -372,6 +373,12 @@ export default function PasswordPageClient({
           )}
         </div>
       </section>
+
+      <p className="mb-2 text-14">
+        <Link href="/password-entropy-calculator" className="font-semibold text-[var(--accent)] hover:underline">
+          Measure length and character set in the password entropy calculator →
+        </Link>
+      </p>
 
       {/* Related Content */}
       <RelatedContent {...passwordRelated} />
