@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { generators } from '../lib/crypto'
 import {
   GeneratorLayout,
@@ -11,6 +12,7 @@ import {
   Toast,
   useToast,
   useRegenerateHotkey,
+  RelatedContent,
 } from '../components'
 
 const SALT_KEYS = [
@@ -27,8 +29,23 @@ const SALT_KEYS = [
 const breadcrumbItems = [
   { name: 'Home', url: '/' },
   { name: 'Developer Generators', url: '/developer' },
-  { name: 'WordPress Salts', url: '/wordpress-salts' },
+  { name: 'WordPress Salt Generator', url: '/wordpress-salts' },
 ]
+
+const saltRelated = {
+  tools: [
+    { href: '/salt', label: 'Salt generator', description: 'Cryptographic salts for password hashing' },
+    { href: '/django-secret-key', label: 'Django SECRET_KEY', description: 'Production-ready Django keys' },
+    { href: '/laravel-key', label: 'Laravel APP_KEY', description: 'Laravel encryption keys' },
+    { href: '/flask-secret-key', label: 'Flask secret key', description: 'SECRET_KEY for sessions and CSRF' },
+    { href: '/secret-key', label: 'Secret key generator', description: 'Base64, hex, and URL-safe secrets' },
+  ],
+  tips: [
+    'Paste the block over the existing salt defines in wp-config.php',
+    'Regenerating salts logs every current user out',
+    'Keep wp-config.php out of version control when it holds these values',
+  ],
+}
 
 export default function WordPressSaltsPageClient() {
   const [salts, setSalts] = useState<Record<string, string>>({})
@@ -66,8 +83,8 @@ export default function WordPressSaltsPageClient() {
 
   return (
     <GeneratorLayout
-      title="WordPress Security Keys & Salts"
-      description="Generate all 8 secure authentication keys and salts for your WordPress wp-config.php file. These enhance the security of cookies and user sessions."
+      title="WordPress Salt Generator"
+      description="Generate all eight WordPress security keys and salts and copy them into wp-config.php. AUTH_KEY, SECURE_AUTH_KEY, LOGGED_IN_KEY, NONCE_KEY, and the matching salts are created in your browser."
       breadcrumbItems={breadcrumbItems}
     >
       {/* Controls */}
@@ -90,9 +107,22 @@ export default function WordPressSaltsPageClient() {
         </div>
       </section>
 
-      {/* Named salts */}
+      <section className="mb-8">
+        <h2 className="mb-2 text-xl font-semibold">wp-config.php salts</h2>
+        <p className="mb-4 text-sm text-[var(--muted)]">
+          This block is the value WordPress reads. Copy it over the authentication keys in{' '}
+          <code className="font-mono">wp-config.php</code>.
+        </p>
+        <CodeBlock
+          filename="wp-config.php"
+          language="php"
+          showLineNumbers
+          code={formatForWpConfig()}
+        />
+      </section>
+
       <section className="mb-6 card p-5 shadow-[var(--shadow-sm)]">
-        <h2 className="mb-4 text-15 font-semibold">Generated keys &amp; salts</h2>
+        <h2 className="mb-4 text-15 font-semibold">Individual keys</h2>
         <div className="space-y-4">
           {SALT_KEYS.map((key) => (
             <GeneratedValue
@@ -103,17 +133,6 @@ export default function WordPressSaltsPageClient() {
             />
           ))}
         </div>
-      </section>
-
-      {/* Copy-all wp-config block */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Copy into wp-config.php</h2>
-        <CodeBlock
-          filename="wp-config.php"
-          language="php"
-          showLineNumbers
-          code={formatForWpConfig()}
-        />
       </section>
 
       {/* Info */}
@@ -170,6 +189,17 @@ ${formatForWpConfig()}
 /* That's all, stop editing! */`}
         />
       </section>
+
+      <p className="mb-6 text-14">
+        These are WordPress cookie salts, not a password-hashing salt. For a general salt, use the{' '}
+        <Link href="/salt" className="font-semibold text-[var(--accent)] hover:underline">salt generator</Link>.
+        Framework keys:{' '}
+        <Link href="/django-secret-key" className="font-semibold text-[var(--accent)] hover:underline">Django</Link>,{' '}
+        <Link href="/laravel-key" className="font-semibold text-[var(--accent)] hover:underline">Laravel</Link>,{' '}
+        <Link href="/flask-secret-key" className="font-semibold text-[var(--accent)] hover:underline">Flask</Link>.
+      </p>
+
+      <RelatedContent {...saltRelated} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

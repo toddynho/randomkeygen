@@ -4,7 +4,7 @@ import JwtSecretPageClient from './JwtSecretPageClient'
 export const metadata: Metadata = {
   title: 'JWT Secret Key Generator - HS256, HS384 & HS512 | RandomKeygen',
   description: 'Generate a secure JWT secret key in your browser: 256-bit HS256, 384-bit HS384 or 512-bit HS512, base64 or hex, one-click copy. Free, nothing sent to a server.',
-  keywords: ['JWT secret generator', 'JWT token generator', 'JWT playground', 'JWT debugger', 'HS256', 'RS256', 'ES256', 'JSON Web Token', 'HMAC secret', 'JWT tools online'],
+  keywords: ['JWT secret generator', 'JWT signing key', 'HS256', 'HS384', 'HS512', 'JSON Web Token', 'HMAC secret', 'JWT tools online'],
   openGraph: {
     title: 'JWT Secret Key Generator - Free & Secure with Implementation Guide',
     description: 'Generate JWT secrets with complete implementation examples and security best practices.',

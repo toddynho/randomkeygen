@@ -1,20 +1,26 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { analyzePasswordEntropy } from '../lib/crypto'
+import { analyzePasswordEntropy, calculateEntropy, crackTime, plainEnglishCrackTime } from '../lib/crypto'
 import {
   GeneratorLayout,
   EntropyReadout,
   SecurityNotice,
   RelatedContent,
+  CheckboxField,
+  RangeField,
 } from '../components'
-import { passwordRelated } from '../components/RelatedContent'
+import { FaqList } from '../components/FaqList'
+import { passwordRelated } from '../components/related-content-data'
+import { entropyFaqs } from './content'
 
 interface EntropyCalculatorClientProps {
   breadcrumbItems: Array<{ name: string; url: string }>
   schema?: Record<string, unknown>[]
 }
+
+const SYMBOL_POOL = 32
 
 const COMMON_PASSWORDS = [
   'password',
@@ -27,6 +33,16 @@ const COMMON_PASSWORDS = [
   'monkey',
   '1234567890',
   'Password1!',
+]
+
+const relatedTools = [
+  { href: '/password', label: 'Password generator', description: 'Strong random passwords' },
+  { href: '/memorable-password', label: 'Memorable password', description: 'Easy-to-remember patterns' },
+  { href: '/pronounceable-password', label: 'Pronounceable password', description: 'Easy-to-say passwords' },
+  { href: '/pin-generator', label: 'PIN generator', description: '4–6 digit PINs' },
+  { href: '/wifi-password', label: 'WiFi password', description: 'WPA2/WPA3 network passwords' },
+  { href: '/bulk-password-generator', label: 'Bulk password generator', description: 'Many passwords at once' },
+  { href: '/password-strength', label: 'Password strength checker', description: 'A quicker strength check' },
 ]
 
 function CharsetBadge({ present }: { present: boolean }) {
@@ -44,61 +60,125 @@ function CharsetBadge({ present }: { present: boolean }) {
   )
 }
 
+function clampLength(value: number): number {
+  if (!Number.isFinite(value)) return 1
+  return Math.min(128, Math.max(1, Math.round(value)))
+}
+
 export default function EntropyCalculatorClient({
   breadcrumbItems,
   schema,
 }: EntropyCalculatorClientProps) {
+  const [length, setLength] = useState(16)
+  const [lower, setLower] = useState(true)
+  const [upper, setUpper] = useState(true)
+  const [digits, setDigits] = useState(true)
+  const [symbols, setSymbols] = useState(true)
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [fromPassword, setFromPassword] = useState(false)
 
-  const analysis = useMemo(() => {
-    if (!password) return null
-    return analyzePasswordEntropy(password)
-  }, [password])
+  const spaceExtra = fromPassword && /\s/.test(password) ? 1 : 0
+  const pool =
+    (lower ? 26 : 0) +
+    (upper ? 26 : 0) +
+    (digits ? 10 : 0) +
+    (symbols ? SYMBOL_POOL : 0) +
+    spaceExtra
+  const bits = pool > 0 ? calculateEntropy(length, pool) : 0
+  const analysis = password ? analyzePasswordEntropy(password) : null
+
+  const applyPassword = (value: string) => {
+    setPassword(value)
+    if (!value) {
+      setFromPassword(false)
+      return
+    }
+    setFromPassword(true)
+    setLength(clampLength(value.length))
+    setLower(/[a-z]/.test(value))
+    setUpper(/[A-Z]/.test(value))
+    setDigits(/[0-9]/.test(value))
+    setSymbols(/[^a-zA-Z0-9\s]/.test(value))
+  }
+
+  const editLength = (value: number) => {
+    setLength(clampLength(value))
+    setFromPassword(false)
+  }
 
   return (
     <GeneratorLayout
       title="Password Entropy Calculator"
-      description="Analyze password strength through entropy calculation, character set analysis, and time-to-crack estimates — computed entirely in your browser. Get recommendations for stronger passwords."
+      description="See entropy in bits and an estimated crack time as you change the length and character set, or type a password and the pool updates to match. Calculated in your browser."
       breadcrumbItems={breadcrumbItems}
       schema={schema}
     >
-      {/* Analyzer panel: input + live entropy readout */}
       <section className="control-panel mb-6 p-5 md:p-6">
-        <label htmlFor="password-input" className="form-label">
-          Enter password to analyze
-        </label>
-        <div className="relative">
-          <input
-            id="password-input"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Type or paste a password here..."
-            className="form-input w-full py-3 pr-20 font-mono text-16"
-            autoComplete="new-password"
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
-          >
-            {showPassword ? 'Hide' : 'Show'}
-          </button>
-        </div>
-        <p className="mt-2 text-xs text-[var(--muted)]">
-          Your password is analyzed locally in your browser and never sent to any server.
-        </p>
-
-        <div className="mt-4 border-t border-[var(--hairline)] pt-4">
-          {analysis ? (
-            <EntropyReadout bits={Math.round(analysis.entropy)} poolSize={analysis.charsetSize} />
+        <div className="mb-5 border-b border-[var(--hairline)] pb-5">
+          {pool > 0 ? (
+            <>
+              <p className="text-sm font-semibold uppercase tracking-wider text-[var(--muted)]">
+                {fromPassword ? 'This password, if it were random' : 'Random string from this pool'}
+              </p>
+              <p className="mt-1 font-mono text-4xl font-bold tracking-tight text-[var(--accent-strong)]">
+                {bits} <span className="text-2xl font-semibold">bits</span>
+              </p>
+              <p className="mt-2 text-base font-medium text-[var(--foreground)]">{crackTime(bits)}</p>
+              <p className="mt-2 text-14 leading-[1.6] text-[var(--muted)]">{plainEnglishCrackTime(bits)}</p>
+            </>
           ) : (
-            <p className="text-14 text-[var(--muted)]">
-              Type a password above to see its estimated entropy, strength rating, and crack time.
-            </p>
+            <p className="text-14 text-[var(--muted)]">Choose at least one character set.</p>
           )}
         </div>
+
+        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_220px]">
+          <RangeField label="Length" value={length} min={1} max={128} onChange={editLength} />
+          <div className="grid grid-cols-2 gap-x-4">
+            <CheckboxField label="a–z" checked={lower} onChange={(checked) => { setLower(checked); setFromPassword(false) }} description="26" />
+            <CheckboxField label="A–Z" checked={upper} onChange={(checked) => { setUpper(checked); setFromPassword(false) }} description="26" />
+            <CheckboxField label="0–9" checked={digits} onChange={(checked) => { setDigits(checked); setFromPassword(false) }} description="10" />
+            <CheckboxField label="Symbols" checked={symbols} onChange={(checked) => { setSymbols(checked); setFromPassword(false) }} description="32" />
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-[var(--muted)]">
+          Pool size {pool || 0}
+          {spaceExtra ? ' (includes 1 for the space in the password)' : ''}.
+          {' '}E = {length} × log₂({pool || 0}), rounded down.
+        </p>
+
+        <div className="mt-5 border-t border-[var(--hairline)] pt-5">
+          <label htmlFor="password-input" className="form-label">
+            Or type a password
+          </label>
+          <div className="relative">
+            <input
+              id="password-input"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(event) => applyPassword(event.target.value)}
+              placeholder="Type or paste a password — length and character set follow it"
+              className="form-input w-full py-3 pr-20 font-mono text-16"
+              autoComplete="new-password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+          <p className="mt-2 text-xs text-[var(--muted)]">
+            The password stays in this browser. Moving the length or a checkbox switches the readout back to a random string of that size.
+          </p>
+        </div>
+
+        {pool > 0 && (
+          <div className="mt-4 border-t border-[var(--hairline)] pt-4">
+            <EntropyReadout bits={bits} poolSize={pool} poolLabel={`${pool}-character pool`} />
+          </div>
+        )}
       </section>
 
       <p className="mb-8 text-14 font-semibold">
@@ -107,12 +187,15 @@ export default function EntropyCalculatorClient({
         </Link>
       </p>
 
-      {/* Detailed analysis */}
       {analysis && (
         <section className="mb-8 space-y-6">
-          {/* Character Set Analysis */}
           <div className="card p-6">
-            <h2 className="mb-4 text-lg font-semibold">Character set analysis</h2>
+            <h2 className="mb-1 text-lg font-semibold">Character set in this password</h2>
+            <p className="mb-4 text-sm text-[var(--muted)]">
+              {fromPassword
+                ? 'The readout above uses this password’s length and the pools it touches.'
+                : `The readout above is a random ${length}-character string (${bits} bits). This password on its own is ${Math.round(analysis.entropy)} bits.`}
+            </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -153,12 +236,11 @@ export default function EntropyCalculatorClient({
             </div>
           </div>
 
-          {/* Recommendations */}
           {analysis.recommendations.length > 0 && (
             <SecurityNotice type="warning" title="Recommendations for improvement">
               <ul className="space-y-1 text-sm">
-                {analysis.recommendations.map((rec, index) => (
-                  <li key={index} className="flex items-start gap-2">
+                {analysis.recommendations.map((rec) => (
+                  <li key={rec} className="flex items-start gap-2">
                     <span className="mt-0.5 text-[var(--warning)]">•</span>
                     {rec}
                   </li>
@@ -169,17 +251,17 @@ export default function EntropyCalculatorClient({
         </section>
       )}
 
-      {/* Password Examples */}
       <section className="mb-8">
         <h2 className="mb-4 text-xl font-semibold">Test common passwords</h2>
         <p className="mb-4 text-sm text-[var(--muted)]">
-          Click on these common passwords to see how weak they really are:
+          These are guesses, not random strings. The bit count is what the pool formula says — an attacker with a dictionary does not need that many tries.
         </p>
         <div className="flex flex-wrap gap-2">
-          {COMMON_PASSWORDS.map((pwd, index) => (
+          {COMMON_PASSWORDS.map((pwd) => (
             <button
-              key={index}
-              onClick={() => setPassword(pwd)}
+              key={pwd}
+              type="button"
+              onClick={() => applyPassword(pwd)}
               className="rounded-[8px] border border-[var(--border-strong)] bg-[var(--surface)] px-3 py-1.5 font-mono text-sm transition-colors hover:border-[var(--accent)]"
             >
               {pwd}
@@ -188,116 +270,42 @@ export default function EntropyCalculatorClient({
         </div>
       </section>
 
-      {/* Education Section */}
-      <section className="mb-8 space-y-6">
-        <h2 className="text-xl font-semibold">Understanding password entropy</h2>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className="card p-4">
-            <h3 className="mb-2 font-semibold">What is entropy?</h3>
-            <p className="text-sm text-[var(--muted)]">
-              Password entropy measures the unpredictability of a password. It&apos;s calculated as
-              log₂(charset size)^length and expressed in bits. Higher entropy means stronger security.
-            </p>
-          </div>
-
-          <div className="card p-4">
-            <h3 className="mb-2 font-semibold">Time to crack</h3>
-            <p className="text-sm text-[var(--muted)]">
-              Estimates assume an attacker renting serious hardware can try a trillion passwords per second.
-              Real-world factors like rate limiting, salting, and key stretching significantly increase security.
-            </p>
-          </div>
-
-          <div className="card p-4">
-            <h3 className="mb-2 font-semibold">Character sets</h3>
-            <div className="space-y-1 text-sm text-[var(--muted)]">
-              <div>• Lowercase only: 26 characters</div>
-              <div>• + Uppercase: 52 characters</div>
-              <div>• + Numbers: 62 characters</div>
-              <div>• + Symbols: 94+ characters</div>
-            </div>
-          </div>
-
-          <div className="card p-4">
-            <h3 className="mb-2 font-semibold">Strength guidelines</h3>
-            <div className="space-y-1 text-sm text-[var(--muted)]">
-              <div>• &lt;30 bits: Very weak</div>
-              <div>• 30-50 bits: Weak</div>
-              <div>• 50-70 bits: Fair</div>
-              <div>• 70-90 bits: Good</div>
-              <div>• 90+ bits: Strong/Very strong</div>
-            </div>
-          </div>
+      <section className="mb-8">
+        <h2 className="mb-3 text-xl font-semibold">How entropy is calculated</h2>
+        <div className="card space-y-3 p-5 text-sm leading-6 text-[var(--muted)]">
+          <p>
+            For a password whose characters are chosen independently and uniformly from a pool of size N,
+            the Shannon entropy is <strong className="text-[var(--foreground)]">E = L × log₂(N)</strong> bits,
+            where L is the length. This page rounds that down with <code className="font-mono">Math.floor</code>,
+            the same helper the other generators use.
+          </p>
+          <p>
+            The pools are lowercase 26, uppercase 26, digits 10, and 32 for any other non-space symbol.
+            A space adds 1 only when you are measuring a password that contains one.
+            Full mixed case, digits, and symbols is 94, so a random 16-character string is{' '}
+            {calculateEntropy(16, 94)} bits.
+          </p>
+          <p>
+            Crack time takes half the keyspace, 2<sup>E−1</sup> guesses, at 10<sup>12</sup> guesses per second,
+            and assumes the attacker knows N. It is not an estimate of how fast someone can guess “password”
+            or a keyboard pattern. Those live in a much smaller list.
+          </p>
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="mb-8">
         <h2 className="mb-6 text-xl font-semibold">Frequently asked questions</h2>
-        <div className="space-y-4">
-          <details className="group">
-            <summary className="mb-2 flex cursor-pointer items-center gap-2 font-medium text-[var(--foreground)]">
-              <span className="text-[var(--muted)] transition-transform group-open:rotate-90">▶</span>
-              How accurate are the time-to-crack estimates?
-            </summary>
-            <div className="ml-6 text-sm text-[var(--muted)]">
-              The estimates assume optimal conditions for an attacker and perfect knowledge of your
-              password&apos;s character set. Real-world attacks face many obstacles like rate limiting,
-              account lockouts, and proper password hashing that dramatically increase the time required.
-            </div>
-          </details>
-
-          <details className="group">
-            <summary className="mb-2 flex cursor-pointer items-center gap-2 font-medium text-[var(--foreground)]">
-              <span className="text-[var(--muted)] transition-transform group-open:rotate-90">▶</span>
-              Is a longer password always better than a complex one?
-            </summary>
-            <div className="ml-6 text-sm text-[var(--muted)]">
-              Generally yes! Length has exponential impact on entropy, while character complexity has linear impact.
-              A 20-character lowercase password often has more entropy than a 12-character mixed-case password with symbols.
-              However, the best approach combines both length and complexity.
-            </div>
-          </details>
-
-          <details className="group">
-            <summary className="mb-2 flex cursor-pointer items-center gap-2 font-medium text-[var(--foreground)]">
-              <span className="text-[var(--muted)] transition-transform group-open:rotate-90">▶</span>
-              What about dictionary words and patterns?
-            </summary>
-            <div className="ml-6 text-sm text-[var(--muted)]">
-              This calculator assumes purely random character selection. Dictionary words, patterns,
-              and predictable substitutions (like @ for a) significantly reduce actual security.
-              Use random generation or high-entropy passphrases for critical accounts.
-            </div>
-          </details>
-
-          <details className="group">
-            <summary className="mb-2 flex cursor-pointer items-center gap-2 font-medium text-[var(--foreground)]">
-              <span className="text-[var(--muted)] transition-transform group-open:rotate-90">▶</span>
-              How much entropy do I need?
-            </summary>
-            <div className="ml-6 text-sm text-[var(--muted)]">
-              For most online accounts: 64+ bits. For high-security accounts: 80+ bits.
-              For master passwords and encryption keys: 128+ bits. Remember that two-factor
-              authentication provides additional security layers beyond just password strength.
-            </div>
-          </details>
-        </div>
+        <FaqList items={entropyFaqs} />
       </section>
 
-      {/* Security Notice */}
       <section className="mb-8">
-        <SecurityNotice type="info" title="Privacy & security">
-          All password analysis happens locally in your browser using JavaScript.
-          Your passwords are never transmitted to any server or stored anywhere.
-          This calculator provides theoretical entropy measurements — consider using
-          a password manager for generating and storing truly secure passwords.
+        <SecurityNotice type="info" title="Privacy">
+          Length, character set, and any password you type are handled in this browser.
+          Nothing is sent to a server. Use a password manager when you need to store what you generate.
         </SecurityNotice>
       </section>
 
-      {/* Related Content */}
-      <RelatedContent {...passwordRelated} />
+      <RelatedContent {...passwordRelated} tools={relatedTools} />
     </GeneratorLayout>
   )
 }

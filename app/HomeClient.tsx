@@ -175,6 +175,7 @@ const GENERATOR_DIRECTORY = [
     links: [
       ['/api-key', 'API keys'],
       ['/jwt-secret', 'JWT secrets'],
+      ['/jwt-generator', 'JWT tokens'],
       ['/uuid', 'UUID'],
       ['/random-string', 'Random string'],
       ['/totp-secret', 'TOTP / 2FA'],
@@ -190,6 +191,7 @@ const GENERATOR_DIRECTORY = [
       ['/hash-generator', 'Hash generator'],
       ['/hmac-key', 'HMAC keys'],
       ['/salt', 'Salt'],
+      ['/wordpress-salts', 'WordPress salts'],
     ],
   },
   {

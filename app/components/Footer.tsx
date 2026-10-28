@@ -37,6 +37,7 @@ const TOOL_CATEGORIES = [
     links: [
       { href: '/api-key', label: 'API Keys' },
       { href: '/jwt-secret', label: 'JWT Secret' },
+      { href: '/jwt-generator', label: 'JWT Token' },
       { href: '/uuid', label: 'UUID' },
       { href: '/random-string', label: 'Random String' },
       { href: '/totp-secret', label: 'TOTP/2FA' },

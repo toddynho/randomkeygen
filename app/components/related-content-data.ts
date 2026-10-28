@@ -23,6 +23,7 @@ export interface RelatedContentProps {
 // Pre-configured related content for different tool categories
 export const passwordRelated: RelatedContentProps = {
   tools: [
+    { href: '/password-entropy-calculator', label: 'Password entropy calculator', description: 'Bits of entropy and crack time' },
     { href: '/password/8-character', label: '8 Character Password', description: 'Legacy system compatible' },
     { href: '/password-strength', label: 'Password Strength Checker', description: 'Test your password security' },
     { href: '/passphrase', label: 'Passphrase Generator', description: 'Easy to remember passwords' },
@@ -67,6 +68,7 @@ export const encryptionRelated: RelatedContentProps = {
 export const developerRelated: RelatedContentProps = {
   tools: [
     { href: '/api-key', label: 'API Key Generator', description: 'Secure API tokens' },
+    { href: '/jwt-generator', label: 'JWT token generator', description: 'Sign and inspect HS256 and RS256 tokens' },
     { href: '/jwt-secret', label: 'JWT Secret Generator', description: 'Token signing keys' },
     { href: '/django-secret-key', label: 'Django Secret Key', description: 'For Django settings' },
     { href: '/uuid', label: 'UUID Generator', description: 'Unique identifiers' },

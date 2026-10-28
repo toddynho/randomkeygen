@@ -343,6 +343,11 @@ print(f"Valid: {is_valid}")`}
         </div>
       </section>
 
+      <p className="mt-6 text-14">
+        TOTP authenticator codes are HMAC-SHA1 of a time counter. Calculate one from a Base32 secret with the{' '}
+        <Link href="/totp-generator" className="font-semibold text-[var(--accent)] hover:underline">TOTP generator</Link>.
+      </p>
+
       <Toast message={toastMessage} />
     </GeneratorLayout>
   )

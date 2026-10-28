@@ -19,6 +19,7 @@
     "@tailwindcss/postcss": "^4.1.18",
     "bcryptjs": "^3.0.3",
     "next": "latest",
+    "qrcode": "^1.5.4",
     "react": "latest",
     "react-dom": "latest"
   },
@@ -27,6 +28,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "jsqr": "^1.4.0",
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"

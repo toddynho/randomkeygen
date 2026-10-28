@@ -21,7 +21,8 @@ export default function JwtTokenGeneratorGuideClient() {
 
       <h2 id="quick-start">Quick Start: Generate Your First JWT</h2>
       <p>
-        Need a JWT token right now? Use our <Link href="/jwt-secret">JWT Token Generator</Link> for instant results.
+        Need a signed token right now? Use the <Link href="/jwt-generator">JWT token generator</Link>.
+        Need only the HMAC signing key? Use the <Link href="/jwt-secret">JWT secret generator</Link>.
       </p>
       <GuideCodeBlock
         label="Example JWT"
@@ -332,7 +333,8 @@ fetch('/api/protected', {
           Create, validate, and test JWT tokens instantly.
         </p>
         <div className="guide-card-grid">
-          <Link href="/jwt-secret"><strong>Generate JWT Tokens Now →</strong><span>Secure generation, multiple algorithms, no server storage, instant results.</span></Link>
+          <Link href="/jwt-generator"><strong>JWT Token Generator →</strong><span>Encode, decode, and verify HS256 and RS256 tokens in your browser.</span></Link>
+          <Link href="/jwt-secret"><strong>JWT Secret Generator →</strong><span>Create the HMAC signing key your app will use.</span></Link>
           <Link href="/guides/jwt-security"><strong>JWT Security Best Practices →</strong><span>Algorithms, secret keys, common attacks, and safe storage.</span></Link>
         </div>
       </section>

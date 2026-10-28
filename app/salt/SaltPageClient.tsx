@@ -209,7 +209,18 @@ const hash = crypto.pbkdf2Sync(
         </div>
       </section>
 
-      <RelatedContent tools={[{ href: '/openssl-rand-hex', label: 'openssl rand -hex 32 generator', description: 'Random hex strings with the matching OpenSSL command' }, { href: '/secret-key', label: 'Secret key generator', description: 'Base64, hex and URL-safe secrets' }]} />
+      <p className="mt-6 text-14">
+        Need the eight WordPress constants instead of a single hashing salt?{' '}
+        <Link href="/wordpress-salts" className="font-semibold text-[var(--accent)] hover:underline">
+          WordPress salt generator →
+        </Link>
+      </p>
+
+      <RelatedContent tools={[
+        { href: '/wordpress-salts', label: 'WordPress salt generator', description: 'AUTH_KEY and the other wp-config.php salts' },
+        { href: '/openssl-rand-hex', label: 'openssl rand -hex 32 generator', description: 'Random hex strings with the matching OpenSSL command' },
+        { href: '/secret-key', label: 'Secret key generator', description: 'Base64, hex and URL-safe secrets' },
+      ]} />
 
       <Toast message={toastMessage} />
     </GeneratorLayout>

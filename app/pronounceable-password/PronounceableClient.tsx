@@ -120,6 +120,9 @@ export default function PronounceableClient() {
           <Link href="/password" className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm transition-colors hover:border-[var(--accent)]">
             Random Password
           </Link>
+          <Link href="/password-entropy-calculator" className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm transition-colors hover:border-[var(--accent)]">
+            Password entropy
+          </Link>
         </div>
       </section>
 

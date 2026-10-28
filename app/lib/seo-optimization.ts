@@ -29,12 +29,12 @@ export function generateJWTTokenMetadata(customTitle?: string, customDescription
     openGraph: {
       title,
       description,
-      url: 'https://randomkeygen.com/jwt-token',
+      url: 'https://randomkeygen.com/jwt-generator',
       type: 'website',
       siteName: 'RandomKeygen',
       images: [
         {
-          url: 'https://randomkeygen.com/jwt-token/og-image.png',
+          url: 'https://randomkeygen.com/jwt-generator/og-image.png',
           width: 1200,
           height: 630,
           alt: 'JWT Token Generator Tool',
@@ -45,11 +45,11 @@ export function generateJWTTokenMetadata(customTitle?: string, customDescription
       card: 'summary_large_image',
       title,
       description,
-      images: ['https://randomkeygen.com/jwt-token/twitter-image.png'],
+      images: ['https://randomkeygen.com/jwt-generator/twitter-image.png'],
       creator: '@randomkeygen'
     },
     alternates: {
-      canonical: 'https://randomkeygen.com/jwt-token'
+      canonical: 'https://randomkeygen.com/jwt-generator'
     },
     robots: {
       index: true,
@@ -210,6 +210,7 @@ export function generateKeygenMetadata(): Metadata {
 export const INTERNAL_LINK_STRATEGIES = {
   // Strategic linking for pages approaching page 1
   jwt: [
+    { href: '/jwt-generator', anchor: 'JWT Token Generator', context: 'sign and inspect tokens' },
     { href: '/jwt-secret', anchor: 'JWT Secret Generator', context: 'signing keys' },
     { href: '/api-key', anchor: 'API Key Generator', context: 'authentication' },
     { href: '/guides/jwt-security', anchor: 'JWT Security Guide', context: 'best practices' },
@@ -238,7 +239,7 @@ export const INTERNAL_LINK_STRATEGIES = {
 // Site speed optimization hints
 export const PERFORMANCE_HINTS = {
   criticalPages: [
-    '/jwt-token',  // Page 1 push priority
+    '/jwt-generator',  // Page 1 push priority
     '/hash-generator', // 8,900 volume opportunity
     '/', // Keygen top 3 push
     '/password', // High traffic retention
@@ -246,7 +247,7 @@ export const PERFORMANCE_HINTS = {
   ],
   
   prefetchResources: {
-    '/jwt-token': [
+    '/jwt-generator': [
       '/_next/static/chunks/jwt-generator.js',
       '/_next/static/chunks/crypto-utils.js',
       '/api/jwt-algorithms'
@@ -272,8 +273,8 @@ export const PERFORMANCE_HINTS = {
 export const CORE_WEB_VITALS_OPTIMIZATION = {
   // Largest Contentful Paint (LCP) optimizations
   LCP: {
-    '/jwt-token': {
-      preloadImage: '/jwt-token/hero-image.webp',
+    '/jwt-generator': {
+      preloadImage: '/jwt-generator/hero-image.webp',
       criticalCSS: 'jwt-generator-critical.css',
       removeRenderBlocking: ['non-critical-jwt.css']
     },
@@ -290,7 +291,7 @@ export const CORE_WEB_VITALS_OPTIMIZATION = {
   // First Input Delay (FID) optimizations
   FID: {
     codesplitting: {
-      '/jwt-token': ['jwt-validation', 'jwt-algorithms'],
+      '/jwt-generator': ['jwt-validation', 'jwt-algorithms'],
       '/hash-generator': ['hash-algorithms', 'file-processing']
     },
     deferNonCritical: [
