@@ -183,7 +183,9 @@ print(signature)`}
         <h2 className="text-2xl font-semibold mb-4">What is HMAC?</h2>
         <div className="prose max-w-none">
           <p className="mb-4">
-            HMAC (Hash-based Message Authentication Code) combines a secret key with a hash function
+            HMAC (Hash-based Message Authentication Code) combines a{' '}
+            <Link href="/secret-key" className="font-semibold text-[var(--accent)] hover:underline">secret key</Link>
+            {' '}with a hash function
             to provide both data integrity and authenticity verification. It&apos;s faster than digital
             signatures while ensuring only someone with the secret key could have created the hash.
           </p>

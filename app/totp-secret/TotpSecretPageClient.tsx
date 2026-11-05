@@ -198,8 +198,9 @@ $isValid = $ga->checkCode($secret, $userCode);`}
         <SecurityNotice type="info" title="How TOTP Works">
           <p className="mb-2">
             TOTP generates a 6-digit code that changes every 30 seconds. Both the server and
-            the user&apos;s authenticator app share the same secret key, allowing them to generate
-            matching codes without network communication.
+            the user&apos;s authenticator app share the same{' '}
+            <Link href="/secret-key" className="font-semibold text-[var(--accent)] hover:underline">secret key</Link>,
+            allowing them to generate matching codes without network communication.
           </p>
           <ul className="list-disc list-inside space-y-1 text-sm">
             <li>Based on HMAC-SHA1 algorithm (RFC 6238)</li>
