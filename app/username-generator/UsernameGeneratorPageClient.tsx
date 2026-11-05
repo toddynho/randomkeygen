@@ -172,8 +172,8 @@ export default function UsernameGeneratorPage() {
 
   return (
     <GeneratorLayout
-      title="Username Generator"
-      description="Generate unique, random usernames for gaming, social media, email accounts, and online services. Multiple styles to match your needs."
+      title="Random Username Generator"
+      description="Free username generator for gaming, social media, email accounts, and online services. Pick a style, click Generate, and get 10 random usernames at a time — none of them leave your browser."
       breadcrumbItems={breadcrumbItems}
     >
       <GeneratorControls onGenerate={handleGenerate} generateLabel="Generate usernames">
@@ -254,6 +254,22 @@ export default function UsernameGeneratorPage() {
               anon_8k3m7x9p, user_q2w4e6r8
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* What makes a good random username */}
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">What makes a good random username</h2>
+        <div className="prose max-w-none">
+          <p className="mb-3 text-[var(--muted)]">
+            A good random username is easy to say and type, gives away nothing about you, and is unusual enough to still be available. This random username generator builds names from word lists and the browser&apos;s secure random number source, so every combination is an unpredictable pick rather than a repeating sequence.
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-[var(--muted)]">
+            <li><strong>Readable beats clever.</strong> The Gaming and Memorable styles pair one adjective with one noun (SwiftWolf, cosmic-eagle-42), which is far easier to remember and share than a string of letters.</li>
+            <li><strong>Nothing personal.</strong> No real names, birth years or locations go into any style, so a generated username can&apos;t be traced back to you. The Anonymous style goes further with a plain prefix and 8 random characters.</li>
+            <li><strong>Numbers make it unique.</strong> Leave Include numbers on to add 1–999 to Gaming names or 10–99 to Memorable ones, which multiplies the possible names and makes a taken handle far less likely.</li>
+            <li><strong>Match the platform.</strong> Use Professional (dev_phoenix, tech_sage) for work and developer accounts, Gaming for games and streaming, and Anonymous for throwaway or privacy-focused accounts.</li>
+          </ul>
         </div>
       </section>
 

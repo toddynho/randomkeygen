@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import UsernameGeneratorPageClient from './UsernameGeneratorPageClient'
 
 export const metadata: Metadata = {
-  title: 'Username Generator - Generate Random Usernames | RandomKeygen',
-  description: 'Free random username generator. Create unique usernames for gaming, social media, email, and online accounts. Multiple styles: cool, professional, anonymous.',
+  title: 'Random Username Generator - Free Username Ideas | RandomKeygen',
+  description: 'Free random username generator. Get 10 unique usernames at a time for gaming, social media, email, and online accounts. Styles: gaming, professional, memorable, anonymous.',
   keywords: ['username generator', 'random username', 'username ideas', 'gaming username generator', 'random username generator', 'cool username generator', 'unique username'],
   openGraph: {
-    title: 'Username Generator - Generate Random Usernames',
+    title: 'Random Username Generator - Free Username Ideas',
     description: 'Create unique usernames for gaming, social media, and online accounts.',
     url: 'https://randomkeygen.com/username-generator',
   },
