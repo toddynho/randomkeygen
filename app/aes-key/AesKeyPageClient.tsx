@@ -138,6 +138,9 @@ export default function AesKeyPageClient({ breadcrumbItems }: AesKeyPageClientPr
       <p className="mb-8 text-sm text-[var(--muted)]">
         For hex or Base64 output, use the{' '}
         <Link href="/aes-256-key" className="font-semibold text-[var(--accent)] hover:underline">256-bit AES encryption key generator</Link>.
+        Setting up passwordless login with biometrics such as Touch ID or Face ID? Generate test{' '}
+        <Link href="/webauthn-credential" className="font-semibold text-[var(--accent)] hover:underline">WebAuthn credentials</Link>
+        {' '}for FIDO2 passkeys instead.
       </p>
 
       {/* Usage */}

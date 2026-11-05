@@ -365,6 +365,11 @@ decrypted += decipher.final('utf8');`}
                 </ul>
               </div>
             </div>
+            <p className="mt-4 text-sm text-[var(--muted)]">
+              Building passwordless login with biometrics such as Touch ID or Face ID instead? Generate test{' '}
+              <Link href="/webauthn-credential" className="font-semibold text-[var(--accent)] hover:underline">WebAuthn credentials</Link>
+              {' '}for platform authenticators and FIDO2 passkeys.
+            </p>
           </div>
         </div>
       </section>

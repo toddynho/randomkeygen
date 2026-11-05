@@ -777,7 +777,7 @@ export default function HomeClient() {
           <div className="mb-6 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="text-xl font-bold tracking-[-0.025em]">Browse all 50+ generators</h2>
-              <p className="mt-1 text-14 text-[var(--muted)]">Every tool has its own page with options, examples, and security guidance.</p>
+              <p className="mt-1 text-14 text-[var(--muted)]">Every tool has its own page with options, examples, and security guidance. Weighing an online keygen against offline tools? Read the <Link href="/guides/keygen-comparison-guide" className="font-semibold text-[var(--link)] hover:underline">keygen comparison guide</Link>.</p>
             </div>
             <Link href="/keygen-hub" className="text-14 font-semibold text-[var(--link)] hover:underline">View complete directory →</Link>
           </div>

@@ -215,7 +215,9 @@ $isValid = $ga->checkCode($secret, $userCode);`}
             <Link href="/backup-codes" className="font-semibold text-[var(--accent)] hover:underline">backup codes</Link>
             {' '}with the secret. TOTP itself is HMAC-SHA1 — see the{' '}
             <Link href="/hmac-key" className="font-semibold text-[var(--accent)] hover:underline">HMAC key generator</Link>
-            {' '}for other HMAC secrets.
+            {' '}for other HMAC secrets. Going passwordless with biometrics like Touch ID or Face ID? Generate test{' '}
+            <Link href="/webauthn-credential" className="font-semibold text-[var(--accent)] hover:underline">WebAuthn credentials</Link>
+            {' '}for FIDO2 passkeys instead.
           </p>
         </SecurityNotice>
       </section>
