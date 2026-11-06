@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 interface FaqLink {
   text: string
@@ -11,7 +12,7 @@ interface FaqItem {
   links?: readonly FaqLink[]
 }
 
-function renderAnswer(answer: string, links?: readonly FaqLink[]) {
+function renderAnswer(answer: string, links?: readonly FaqLink[]): ReactNode {
   if (!links || links.length === 0) return answer
   const [link, ...rest] = links
   const index = answer.indexOf(link.text)
