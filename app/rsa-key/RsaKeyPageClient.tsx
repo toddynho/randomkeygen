@@ -279,7 +279,11 @@ export default function RsaKeyPageClient({ breadcrumbItems, schema }: RsaKeyPage
         <p className="mb-4 max-w-[75ch] text-15 leading-[1.65] text-[var(--body)]">
           RSA (Rivest-Shamir-Adleman) is one of the most widely used public-key cryptosystems for secure data
           transmission. Named after its inventors Ron Rivest, Adi Shamir, and Leonard Adleman, RSA enables secure
-          communication without requiring a shared secret key.
+          communication without requiring a shared{' '}
+          <Link href="/secret-key" className="font-semibold text-[var(--accent-strong)] hover:underline">
+            secret key
+          </Link>
+          .
         </p>
 
         <div className="mb-6 grid gap-4 md:grid-cols-3">

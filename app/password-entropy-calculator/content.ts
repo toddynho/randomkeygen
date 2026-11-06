@@ -10,6 +10,7 @@ export const entropyFaqs = [
   {
     q: 'Is a longer password always better than a complex one?',
     a: 'Length multiplies the exponent, so it usually adds more entropy than swapping in one more symbol class. A 20-character lowercase string is about 94 bits; a 12-character string from a 94-character pool is about 78 bits. Use both when the system allows it. A passphrase drawn from a large word list is a different pool — its entropy is word count times log₂ of the list size, not character length.',
+    links: [{ text: '20-character', href: '/password/20-character' }],
   },
   {
     q: 'What about dictionary words and patterns?',
