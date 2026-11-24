@@ -318,6 +318,21 @@ export default function WifiPasswordPage() {
         </div>
       </section>
 
+      {/* ZTE Router Steps */}
+      <section className="mb-8 card p-6">
+        <h2 className="text-xl font-medium mb-4">Changing the WiFi password on a ZTE router</h2>
+        <p className="mb-4 text-[var(--muted)]">
+          This generator creates a new random WiFi password you can set on a ZTE router or modem. It does not recover or calculate the factory password printed on the device.
+        </p>
+        <ol className="list-decimal pl-6 text-[var(--muted)] space-y-1">
+          <li>Generate a password with the tool above and copy it. The default length is 20 characters.</li>
+          <li>On a phone or computer connected to the ZTE router, open a browser, go to the admin address printed on the router&apos;s label, and sign in with the login shown there.</li>
+          <li>Open the wireless settings, often labeled WLAN or Wi-Fi. Menu names vary by ZTE model and internet provider.</li>
+          <li>In the security settings, paste the new password into the WiFi password field (it may be called the passphrase or key) and save.</li>
+          <li>Reconnect each device using the new password. Devices that were connected will drop off until you do.</li>
+        </ol>
+      </section>
+
       {/* Guest Network Best Practices */}
       <section className="mb-8 card p-6">
         <h2 className="text-xl font-medium mb-4">Guest Network Best Practices</h2>
